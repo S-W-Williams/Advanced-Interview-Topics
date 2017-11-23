@@ -78,32 +78,35 @@ Will include topic notes as they are finished being formatted.
 	- Closest pairs
 	
 # Arrays
-- Selection Algorithms
-	- An example of a selection problem is selecting the kth smallest element from an unsorted collection of n elements. Can be solved in O(N Log N) time using sorting, but we can do better.
-	- O(N) approach for solving selection problems is called Prune and Search (variant of divide and conquer)
-	- Common strategy of rune and search algorithms:
-		-  Choose an “approximate median” m∗ 
-		-  Partition S into three subsequences: 
-			-  L: elements in S less than m∗ . 
-			- E: elements in S equal to m∗
-			- G: elements in S greater than m∗ 
-		- Recursively select L, E, or G as appropriate
-	- Randomized Quick-Select:
-		- Average O(N), O(N2) worst case.
-		- When recursively selecting:
-			- if k ≤ |L| then
-				- quickSelect(L, k)
-			- else if k ≤ |L| + |E| then
-				- return x
-			- else
-				- quickSelect(G, k − |L| − |E|)
+## Selection Algorithms
+An example of a selection problem is selecting the kth smallest element from an unsorted collection of n elements. Can be solved in O(N Log N) time using sorting, but we can do better.
+
+O(N) approach for solving selection problems is called Prune and Search (variant of divide and conquer)
+
+### Common strategy of rune and search algorithms:
+-  Choose an “approximate median” m∗ 
+-  Partition S into three subsequences: 
+	-  L: elements in S less than m∗ . 
+	- E: elements in S equal to m∗
+	- G: elements in S greater than m∗ 
+- Recursively select L, E, or G as appropriate
+
+### Randomized Quick-Select:
+- Average O(N), O(N2) worst case.
+- When recursively selecting:
+	- if k ≤ |L| then
+		- quickSelect(L, k)
+	- else if k ≤ |L| + |E| then
+		- return x
+	- else
+		- quickSelect(G, k − |L| − |E|)
 				
-	- Deterministic Selection:
-		- Always O(N)
-		- Deterministic meaning will always have same runtime for given inputs
-		- Idea is to deterministically pick the pivot instead of randomly
-		- Algorithm:
-			- Partition the set S into  ceiling(n/5) groups of size 5 each (except, possibly, for one group).
-			- Sort each group and identify its median element.
-			- Apply the algorithm recursively on these ceiling(n/5) “baby medians” to find their median.
-			- Use this element (the median of the baby medians) as the pivot and proceed as in the quick-select algorithm.
+### Deterministic Selection:
+- Always O(N)
+- Deterministic meaning will always have same runtime for given inputs
+- Idea is to deterministically pick the pivot instead of randomly
+- Algorithm:
+	- Partition the set S into  ceiling(n/5) groups of size 5 each (except, possibly, for one group).
+	- Sort each group and identify its median element.
+	- Apply the algorithm recursively on these ceiling(n/5) “baby medians” to find their median.
+	- Use this element (the median of the baby medians) as the pivot and proceed as in the quick-select algorithm.
