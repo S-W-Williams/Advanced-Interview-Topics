@@ -13,15 +13,15 @@ Will include topic notes as they are finished being formatted.
 	  - Used to sort array in-place with constant space
   
 - ## Strings:
-	- Rabin–Karp
+	- [Rabin–Karp](#rabin-karp)
 	- Knuth–Morris–Pratt
 	- Boyer–Moore
   
 - ## Graphs:
 - ### Basics:
-	- Topological Sorting
 	- [Connected Components](#connected-components)
 	- [Strongly Connected Components](#strongly-connected-components)
+	- [Topological Sorting](#topological-sort)
 	- [Disjoint-Set (Union-Find)](#disjoint-set-union-find)
 	- Biconnected Components
 	
@@ -161,6 +161,25 @@ def inplaceMergeSort(a):
 
 In the final loop, we start storing the final sorted subarray at index 0, and every time we increment the size. Once the final sorted subarray is bigger than the sorted left size, we start taking elements from the right side and then also decreasing the size of the subarray.
 
+# Strings
+## Rabin-Karp
+String matching algorithm with linear O(|s| + |t|) time complexity. 
+
+Used to solve the problem "Given s and t, does s occur as a substring in t?".
+
+Uses rolling hash and sliding window of size |s| on t and compare hash values.
+
+When the hash value of the window matches hash of s, check the characters one by one for a match. If they are all equal, we have found a match. If they are not equal, keep going.
+
+The probability of matching hash values being a collision should happen with the probability of 1/|s|
+
+Algorithm:
+- Compute hash of s
+- Compute hash of the first |s| characters in t 
+- For i in range(len(s), len(t): 
+	- Compare hash values of s and the window
+	- If no match, remove first character and add the next character
+
 # Graphs
 Note that for Big O notation of graph algorthims, E and V is actually |E| and |V|. I omitted the cardinality notation for simplicity. 
 
@@ -228,6 +247,48 @@ To transpose/invert a graph:
 	- For each neighboring vertex v:
 		- Add u to the adjacency list of v
 		- r[v].add(u)
+		
+## Topological Sort
+Topological sort, or topological ordering, of a directed graph is a linear ordering of its vertices such that for every directed edge uv from vertex u to vertex v, u comes before v in the ordering.
+
+Used for dependency resolution, prerequisites planning, etc.
+
+Any DAG has at least one topological ordering. DFS allows for linear time construction.
+
+A very simple DFS approach is to order the vertices in decreasing order of their post visit times. This is because of the follow property:
+- In a DAG, every edge leads to a vertex with a lower post number
+
+Recall that determining the post visit times of vertices can be simplified using a stack. The last vertex pushed onto the stack has the highest post visit time. 
+
+Once DFS is done, the vertex at the top of the stack is the one with the highest post-visit time.
+
+Explore(u):
+- Visited[u] = True
+- For neighbors v that have not been visited:
+	○ ExplorePV(v, s)
+- Push u to stack
+
+Another algorithm for topological sorting, from Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani is below.
+
+We will keep an array in[u] which holds the indegree (number of incoming edges) of each node. For a source, this value is zero. We will also keep a linked list of source nodes.
+
+```
+(Set the in array)
+for all u ∈ V: in[u] ← 0
+for all edges (u,w) ∈ E: in[w] ← in[w]+1
+	
+(Check for sources)
+L ← empty linked list
+for all u ∈ V:
+  if in[u] is 0: add u to L
+
+for i=1 to |V|:
+Let u be the first node on L; output it and remove it from L.
+(Remove u; update indegrees.)
+for each edge (u,w) ∈ E:
+    in[w] ← in−1
+    if in[w] is 0: add w to L.
+```
 
 ## Disjoint-Set (Union-Find)
 Keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets.
