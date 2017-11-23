@@ -18,12 +18,12 @@ Will include topic notes as they are finished being formatted.
 	- Boyer–Moore
   
 - ## Graphs:
-	- ### Basics:
-		- Topological Sorting
-		- Connected Components
-		- Strongly Connected Components
-		- Disjoint-Set (Union-Find)
-		- Biconnected Components
+- ### Basics:
+	- Topological Sorting
+	- [Connected Components](#connected-components)
+	- [Strongly Connected Components](#strongly-connected-components)
+	- [Disjoint-Set (Union-Find)](#disjoint-set-union-find)
+	- Biconnected Components
 	
 - ### Paths:
 	- Dijkstra's
