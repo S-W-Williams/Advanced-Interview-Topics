@@ -4,9 +4,19 @@ This is a compilation of my write ups of coding problems that I found valuable.
 # Math Problems
 ## Next Permutation
 [LeetCode #31](https://leetcode.com/problems/next-permutation/description/)
+
 Just requires implementation of the next lexicographic permutation algorithm. Description can be found in my notes.
 
 # Tree Problems
+## Unique Binary Search Trees
+[LeetCode #96](https://leetcode.com/problems/unique-binary-search-trees/description/)
+
+This is one of the problems where its better to just know the math formula for it. This is an application of the Catalan numbers.
+
+From Wikipedia: "Cn is the number of non-isomorphic ordered trees with n vertices. (An ordered tree is a rooted tree in which the children of each vertex are given a fixed left-to-right order.)"
+
+Cn = (2n)!/(n+1)!n!
+
 ## Binary Tree Maximum Path Sum
 [LeetCode #124](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/)
 
