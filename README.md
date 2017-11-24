@@ -33,9 +33,9 @@ Will include topic notes as they are finished being formatted.
 	- Johnson's Algorithm
 	- Widest Path problem
 
-- ### Euler Tours:
-	- Fleury's Algorithm
-	- Hierholzer's Algorithm
+- ### Eulerian Graphs:
+	- [Trails/Cycles](#eulerian-trails-cycles)
+	- [Hierholzer's Algorithm](#hierholzers-algorithm)
 
 - ### Minimum Spanning Trees:
 	- Kruskal's
@@ -338,3 +338,60 @@ class DisjointSet:
             self.ranks[a] += 1
         return
 ```
+## Eulerian Graphs
+An Euler trail:
+- visits every edge in the graph exactly once (vertices may well be crossed more than once)
+- is a trail that crosses every edge exactly once without repeating, if it ends at the initial vertex then it is a Euler cycle.
+
+An undirected graph has an Eulerian cycle if and only if every vertex has even degree, and all of its vertices with nonzero degree belong to a single connected component.
+
+How to tell if a undirected graph is Eulerian or not?
+- Eulerian Cycle
+	- An undirected graph has Eulerian cycle if following two conditions are true.
+		- All vertices with non-zero degree are connected.
+			- We don’t care about vertices with zero degree because we only need to visit edges.
+		- All vertices have even degree.
+
+- Eulerian Trail
+	- An undirected graph has Eulerian Path if following two conditions are true.
+		- All vertices with non-zero degree are connected.
+		- If 0 or 2 vertices have odd degree and all other vertices have even degree. 
+		- Only 1 vertex odd degree vertex is not possible in an undirected graph (sum of all degrees is always even in an undirected graph)
+
+How to check if a directed graph is Eulerian?
+- Eulerian Cycle
+	- A directed graph has an Eulerian circuit if it is connected and each vertex has the same in-degree as out-degree.
+	
+- Eulerian Trial
+	- A directed graph has an Eulerian path if it is connected and each vertex except 2 have the same in-degree as out-degree
+	- One of those 2 vertices must have an out-degree 1 larger than its in-degree 
+		- This is the start vertex
+	- The other vertex must have an in-degree 1 larger than its out-degree
+		- This is the end vertex
+
+## Hierholzer’s Algorithm
+For finding Eulerian Circuits in O(E+V) time complexity.
+
+Algorithm for undirected graphs:
+- Start with an empty stack and an empty circuit (Eulerian path).
+	- If all vertices have even degree - choose any of them.
+	- If there are exactly 2 vertices having an odd degree - choose one of them.
+	- Otherwise no Euler circuit or path exists.
+- If it has neighbors: 
+	- Add the vertex to the stack and set it as the current vertex
+	- Take any of its neighbors, remove the edge between that neighbor and the vertex, and set the neighbor as the current vertex.
+- If current vertex has no neighbors:
+	- Add it to circuit, pop the next vertex from the stack 
+- Repeat until the current vertex has no more neighbors and the stack is empty.
+- Note that obtained circuit will be in reverse order - from end vertex to start vertex.
+
+Algorithm for directed graphs:
+- Start with an empty stack and an empty circuit
+	- If all vertices have same out-degrees as in-degrees - choose any of them.
+	- Otherwise choose the vertex whose out-degree is 1 larger than its in-degree.
+		- See Eulerian Path requirements for details
+- If current vertex has no out edges:
+	- Add it to circuit, pop the next vertex from the stack and set it as the current one.
+- If current vertex has out edges:
+	- Add the vertex to the stack, take any of its neighbors, remove the edge between that vertex and selected neighbor, and set that neighbor as the current vertex.
+	- Repeat until the current vertex has no more out edges and the stack is empty.
