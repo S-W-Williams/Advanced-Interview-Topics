@@ -268,7 +268,20 @@ Explore(u):
 	○ ExplorePV(v, s)
 - Push u to stack
 
-Another algorithm for topological sorting, from Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani is below.
+However this DFS approach will not work if there is cycle, so we must modify it to account for them. The following pseudo-code is from Wikipedia:
+
+```
+ function visit(node n)
+    if n has a permanent mark then return
+    if n has a temporary mark then stop (not a DAG)
+    mark n temporarily
+    for each node m with an edge from n to m do
+        visit(m)
+    mark n permanently
+    add n to head of L
+```
+
+Another algorithm for topological sorting is Kahn's algorithm (the psuedo-code from Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani is below).
 
 We will keep an array in[u] which holds the indegree (number of incoming edges) of each node. For a source, this value is zero. We will also keep a linked list of source nodes.
 
@@ -289,6 +302,8 @@ for each edge (u,w) ∈ E:
     in[w] ← in−1
     if in[w] is 0: add w to L.
 ```
+
+At the end we can check to see if the graph has edges to see if there is a cycle or not. If the degree of vertex is greater than 0, then there is a cycle.
 
 ## Disjoint-Set (Union-Find)
 Keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets.
