@@ -14,8 +14,6 @@ Will include topic notes as they are finished being formatted.
   
 - ## Strings:
 	- [Rabin–Karp](#rabin-karp)
-	- Knuth–Morris–Pratt
-	- Boyer–Moore
   
 - ## Graphs:
 - ### Basics:
@@ -34,8 +32,9 @@ Will include topic notes as they are finished being formatted.
 	- Widest Path problem
 
 - ### Eulerian Graphs:
-	- [Trails/Cycles](#eulerian-trails-cycles)
+	- [Trails/Cycles](#eulerian-graphs-1)
 	- [Hierholzer's Algorithm](#hierholzers-algorithm)
+	- [Fleury’s Algorithm](#fleurys-algorithm)
 
 - ### Minimum Spanning Trees:
 	- Kruskal's
@@ -410,3 +409,13 @@ Algorithm for directed graphs:
 - If current vertex has out edges:
 	- Add the vertex to the stack, take any of its neighbors, remove the edge between that vertex and selected neighbor, and set that neighbor as the current vertex.
 	- Repeat until the current vertex has no more out edges and the stack is empty.
+	
+## Fleury’s Algorithm
+Like Hierholzer's algorithm, Fleury's algorithm is used for finding Eulerian Trial/Cycles. Fluery's has worse time complexity with O((E+V)^2), but it is easier to implement for Eulerian trail problems.
+
+Picking the starting edge for Fleury's is the same as in Hierholzer's. The idea behind Fluery's is "don't burn bridges". A bridge being the only edge connecting a vertex to another. 
+
+If we have a choice between a bridge and a non-bridge, always choose the non-bridge.
+
+This can be implemented by checking if removing a given edge between v and u will make u have a degree of 0. The algorithm stops when there are not more edges.
+
