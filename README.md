@@ -24,8 +24,8 @@ Will include topic notes as they are finished being formatted.
 	- Biconnected Components
 	
 - ### Paths:
-	- Dijkstra's
-	- Bellman-Ford
+	- [Dijkstra's](#dijkstra-shortest-path-algorithm)
+	- [Bellman-Ford](#bellman-ford)
 	- A*
 	- Floyd-Warshall
 	- Johnson's Algorithm
@@ -37,8 +37,8 @@ Will include topic notes as they are finished being formatted.
 	- [Fleury’s Algorithm](#fleurys-algorithm)
 
 - ### Minimum Spanning Trees:
-	- Kruskal's
-	- Prim's
+	- [Kruskal's](#kruskals-algorithm)
+	- [Prim's](#prims-algorithm)
 	- Edmonds' (arborescences)
 
 - ### Independent Sets
@@ -352,6 +352,95 @@ class DisjointSet:
             self.ranks[a] += 1
         return
 ```
+
+## Dijkstra's Shortest Path Algorithm
+Implementation can vary a lot. Most textbooks give the pseudo-code for the version that uses a min-heap and decrease-key method. However, decrease-key requires extra space to keep track of the location of each node in the heap. Implementations that uses heaps have a time complexity of O((E + V) Log V), which can be simplified to O(E Log V) for connected graphs.
+
+Other version is to simply enqueue the neighbor whenever a new minimum is found. Time complexity for the priority queue will be O(E), so time complexity will still be O(E Log V). 
+
+Fibonacci heap is most optimal implementation with a time complexity of O(E + V Log V), but likely to be unnecessary for sparse graphs. 
+
+```
+Dijkstra's Shortest Path O(E Log V):
+	- Create distance and parent maps. 
+	- Create priority queue (key for each vertex is its value in distance map).
+	- For each vertex in graph, set distance as infinity.
+	- Set source distance to 0.
+	- Enqueue source vertex. 
+		○ If using a min heap, enqueue all the vertices, and then decrease their key instead of enqueuing when a new cost is found.
+			§ To decrease key we update the value of the node in the heap and then bubble it up.
+	- While queue is not empty:
+		○ Get next vertex with lowest cost v
+		○ For all neighbors u:
+			§ If dist(v) + cost(u) < dist(u):
+				□ Update distance and parent values in the respective maps
+				□ enqueue(u)
+	- Return parent map. Can also return distance map if path costs are needed.
+
+To build path recursively look up destination parent from parent map. 
+	- For base case check if edge has parent, if not then it is the source.
+	- Then look up parent of the destination edge.
+	- Recursive call is createPath(parents, parent) + parent
+
+Dijkstra's does not work on graphs with negative weights because once a node has been dequeued it assumes the shortest path to that node has been found.
+```
+
+## Bellman-Ford
+O(V*E) Algorithm used to find shortest paths in graphs with negative weights. Can also detect negative cycles.
+
+Idea is to update all the edges |V| - 1 times. This ensures that shortest path from the source to all vertices have been found. Then we do one more iteration, and if any distance can be updated then there is a negative cycle.
+```
+Bellman-Ford:
+	- Declare a distance and parent dictionary
+	- Set all distances to infinity and vertices' parents to itself.
+	- Set source distance to 0
+	- Loop for |V| - 1 times:
+		○ For all edges(u, v) with weight w in graph G:
+			§ If distance[u] is infinity, we skip it
+			§ Otherwise:
+				□ If distance[u] + w < distance[v]:
+					® Update distance and parent of v
+Loop one more time, and if any shorter distances are found, we know a negative cycle exists. 
+```
+
+## Kruskal's Algorithm
+Greedy algorithm for finding minimum spanning tree of a graph. Time complexity is O(|E| log |V|).
+
+Idea is to start with an empty tree T, and while the size of T is |V| - 1 edges,
+repeatedly take the smallest edge from the graph and insert it into the tree. Ensure that adding the edge does not create a cycle (skip the edge if it does). 
+
+Kruskal's can be implemented efficiently using the Disjoint-Set structure. The implementation varies depending on the representation of the graph. 
+
+```
+To find a MST (there can be multiple) in a graph G:
+- Declare empty set T to hold the MST.
+- Create a set in the Disjoint-Set for every edge in G.
+- Sort all the edges in G by their weight value and put them in a priority queue.
+- While there are less than |V| - 1 edges in T:
+	- Pop the next smallest edge (u, v) from the priority queue
+	- Get the parent of u and the parent of v
+		- Ensure that they do not equal each other
+	- Add the edge to T
+	- Merge the sets of u and v in the Disjoint-Set.
+- Return T
+```
+
+The reason we stop when size of T is equal to |V| - 1 is each vertex in an MST can only have one edge connecting it to another vertex. The amount of edges |E| in a connected graph cannot be less than |V| - 1, so we do not need to check if the priority queue is empty. If we are given a graph with more than one connected component then this does not apply.
+
+
+## Prim's Algorithm
+Greedy algorithm for finding minimum spanning tree in an undirected graph. Idea is to start out with a vertex, and repeatedly add the next reachable vertex with the lowest edge cost until all vertices are in the MST.
+
+When implemented using a Fibonacci heap its time complexity is O(E + V Log V), otherwise O(E Log V).
+
+Prim's algorithm is similar to Dijkstra's shortest path algorithm. We declare a distance and parent dictionary. Set all distances to infinity and all vertices' parents to itself. Pick a vertex as the starting vertex and set its distance to 0.
+
+A major difference between Prim's and Dijkstra's is for Prim's we only keep track of the shortest edge (recall in Dijkstra's we add the edge value to the previous value). 
+
+If implemented using a heap, we must enqueue all vertices at the beginning. The key is the smallest edge value of each vertex. When a smaller distance value is found we do a decrease key operation.
+
+Can also be implemented using a priority queue with a set keeping track of visited vertices. Visited means the vertex has been popped from the queue. We only update and enqueue neighboring vertices of a vertex if it has not been visited and has a shorter distance than what is stored in the distance dictionary. 
+
 ## Eulerian Graphs
 An Euler trail:
 - visits every edge in the graph exactly once (vertices may well be crossed more than once)
