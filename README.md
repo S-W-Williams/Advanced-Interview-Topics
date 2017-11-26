@@ -14,7 +14,9 @@ Will include topic notes as they are finished being formatted.
   
 - ## Strings:
 	- [Rabin–Karp](#rabin-karp)
-  
+- ## Trees:
+	- [Prefix Tree (Trie)](#prefix-tree)
+	
 - ## Graphs:
 - ### Basics:
 	- [Connected Components](#connected-components)
@@ -83,33 +85,37 @@ An example of a selection problem is selecting the kth smallest element from an 
 O(N) approach for solving selection problems is called Prune and Search (variant of divide and conquer)
 
 ### Common strategy of rune and search algorithms:
+```
 -  Choose an “approximate median” m∗ 
 -  Partition S into three subsequences: 
 	-  L: elements in S less than m∗ . 
 	- E: elements in S equal to m∗
 	- G: elements in S greater than m∗ 
 - Recursively select L, E, or G as appropriate
-
+```
 ### Randomized Quick-Select:
 - Average O(N), O(N2) worst case.
 - When recursively selecting:
+```
 	- if k ≤ |L| then
 		- quickSelect(L, k)
 	- else if k ≤ |L| + |E| then
 		- return x
 	- else
 		- quickSelect(G, k − |L| − |E|)
-				
+```
 ### Deterministic Selection:
 - Always O(N)
 - Deterministic meaning will always have same runtime for given inputs
 - Idea is to deterministically pick the pivot instead of randomly
 - Algorithm:
+```
 	- Partition the set S into  ceiling(n/5) groups of size 5 each (except, possibly, for one group).
 	- Sort each group and identify its median element.
 	- Apply the algorithm recursively on these ceiling(n/5) “baby medians” to find their median.
 	- Use this element (the median of the baby medians) as the pivot and proceed as in the quick-select algorithm.
-	
+```
+
 ## Bottom Up Merge Sort
 Useful for stable sorting in place without extra space. 
 
@@ -180,7 +186,79 @@ Algorithm:
 	- Compare hash values of s and the window
 	- If no match, remove first character and add the next character
 ```
+# Trees
+## Prefix Tree
+Also known as a trie. 
+- Is pronounced as the middle syllable of retrieval. 
+- O(w) search, w being the length of the query.
+- Space complexity is O(N*K)
+- Easy to implement with a dictionary.
+	○ Textbook implementations generally use an array of the 26 alphabet characters.
+- Every node should also keep track of whether it is the ending letter of a word or not.
+- Root can also be empty node to denote multiple starting prefixes.
 
+Variations: 
+- Ternary search tree (pronounced turn-a-ry):
+	- Type of trie where nodes are ordered like BSTs nodes
+	- 3 children instead of 2
+	- More space efficient at the cost of speed
+- Radix tree 
+	- A compressed trie
+	- Has a variation of it called Patricia tree
+
+Trie implementation with dictionaries:
+```python
+class Trie(object):
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.keys = dict()
+
+    def insert(self, word):
+        """
+        Inserts a word into the trie.
+        :type word: str
+        :rtype: void
+        """
+        cur = self.keys
+        for c in word:
+            if c not in cur:
+                cur[c] = dict()
+            cur = cur[c]
+        cur[0] = True
+        return
+            
+    def search(self, word):
+        """
+        Returns if the word is in the trie.
+        :type word: str
+        :rtype: bool
+        """
+        cur = self.keys
+        for c in word:
+            if c not in cur:
+                return False
+            cur = cur[c]
+        if 0 in cur:
+            return True
+        return False
+        
+
+    def startsWith(self, prefix):
+        """
+        Returns if there is any word in the trie that starts with the given prefix.
+        :type prefix: str
+        :rtype: bool
+        """
+        cur = self.keys
+        for c in prefix:
+            if c not in cur:
+                return False
+            cur = cur[c]
+        return True 
+```
 # Graphs
 Note that for Big O notation of graph algorthims, E and V is actually |E| and |V|. I omitted the cardinality notation for simplicity. 
 
