@@ -24,7 +24,7 @@ Will include topic notes as they are finished being formatted.
 	- Biconnected Components
 	
 - ### Paths:
-	- [Dijkstra's](#dijkstra-shortest-path-algorithm)
+	- [Dijkstra's](#dijkstras-shortest-path-algorithm)
 	- [Bellman-Ford](#bellman-ford)
 	- A*
 	- Floyd-Warshall
@@ -173,11 +173,13 @@ When the hash value of the window matches hash of s, check the characters one by
 The probability of matching hash values being a collision should happen with the probability of 1/|s|
 
 Algorithm:
+```
 - Compute hash of s
 - Compute hash of the first |s| characters in t 
 - For i in range(len(s), len(t): 
 	- Compare hash values of s and the window
 	- If no match, remove first character and add the next character
+```
 
 # Graphs
 Note that for Big O notation of graph algorthims, E and V is actually |E| and |V|. I omitted the cardinality notation for simplicity. 
@@ -193,6 +195,7 @@ We can find connected components in a undirected graph by doing a DFS on the ent
 The important here to note is that DFS must be run on the entire graph, meaning we must iterate through all the vertices in the graph and recursively explore each vertex. Keep track of which vertices have been visited, and skip the ones that have been visited.
 
 DFS for finding connected components:
+```
 - Create visited set
 - Create dictionary to store connected components scc
 - Set counter c to 0
@@ -206,13 +209,15 @@ The Explore function assigns v to the connected component set c, and then recurs
 - Add v to the set in stored in connected components dictionary at key c
 - For all neighbors u of v that have not been visited:
 	- Explore(u, c)
-	
+```
+
 ## Strongly Connected Components
 We can also find strongly connected components in directed graphs using DFS with O(E + V) time complexity. The algorithm given in Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani suggests doing DFS on the graph while keeping track of the pre-visit and post-visit time of each vertex. The vertex with the highest post-visit time will belong to a sink SCC. Knowing this, we then transpose (also called reverse) the graph, and then do a DFS for finding connected components on the reversed graph starting with the highest post-time vertex. Repeat until we have visited all vertexes in the stack. 
 
 We can simplify this by keeping track of the order the vertices are processed in a stack. Once DFS is done, the vertex at the top of the stack is the one with the highest post-visit time.
 
 SCC-DFS:
+```
 - Create empty stack s
 - Create strongly connected components dictionary scc
 - Create visited set
@@ -227,26 +232,35 @@ SCC-DFS:
 	- If u is not visited:
 		- Increment counter
 		- ExploreSCC(u, c, scc)
+```
 
 ExplorePV never pops from s, instead it marks u as visited, recursively calls itself on u's neighbors that have not been visited, and then pushes u to the stack. 
+
+```
 - Visited[u] = True
 - For neighbors v that have not been visited:
 	- ExplorePV(v, s)
 - Push u to s
+```
 
 ExploreSCC marks u as visited, puts u into the scc at key c, and then calls itself on u's neighbors that have not been visited.
+
+```
 - Visited[u] = True
 - Put u into the set at scc[c]
 - For neighbors v that have no been visited:
 	- ExploreSCC(v, c, scc)
+```
 
 To transpose/invert a graph:
+```
 - Create a dictionary r of adjacency lists
 - For each vertex u in the original graph:
 	- For each neighboring vertex v:
 		- Add u to the adjacency list of v
 		- r[v].add(u)
-		
+```
+
 ## Topological Sort
 Topological sort, or topological ordering, of a directed graph is a linear ordering of its vertices such that for every directed edge uv from vertex u to vertex v, u comes before v in the ordering.
 
@@ -260,13 +274,13 @@ A very simple DFS approach is to order the vertices in decreasing order of their
 Recall that determining the post visit times of vertices can be simplified using a stack. The last vertex pushed onto the stack has the highest post visit time. 
 
 Once DFS is done, the vertex at the top of the stack is the one with the highest post-visit time.
-
+```
 Explore(u):
 - Visited[u] = True
 - For neighbors v that have not been visited:
 	○ ExplorePV(v, s)
 - Push u to stack
-
+```
 However this DFS approach will not work if there is cycle, so we must modify it to account for them. The following pseudo-code is from Wikipedia:
 
 ```
@@ -381,9 +395,9 @@ To build path recursively look up destination parent from parent map.
 	- For base case check if edge has parent, if not then it is the source.
 	- Then look up parent of the destination edge.
 	- Recursive call is createPath(parents, parent) + parent
+```
 
 Dijkstra's does not work on graphs with negative weights because once a node has been dequeued it assumes the shortest path to that node has been found.
-```
 
 ## Bellman-Ford
 O(V*E) Algorithm used to find shortest paths in graphs with negative weights. Can also detect negative cycles.
@@ -449,6 +463,7 @@ An Euler trail:
 An undirected graph has an Eulerian cycle if and only if every vertex has even degree, and all of its vertices with nonzero degree belong to a single connected component.
 
 How to tell if a undirected graph is Eulerian or not?
+```
 - Eulerian Cycle
 	- An undirected graph has Eulerian cycle if following two conditions are true.
 		- All vertices with non-zero degree are connected.
@@ -460,8 +475,10 @@ How to tell if a undirected graph is Eulerian or not?
 		- All vertices with non-zero degree are connected.
 		- If 0 or 2 vertices have odd degree and all other vertices have even degree. 
 		- Only 1 vertex odd degree vertex is not possible in an undirected graph (sum of all degrees is always even in an undirected graph)
+```
 
 How to check if a directed graph is Eulerian?
+```
 - Eulerian Cycle
 	- A directed graph has an Eulerian circuit if it is connected and each vertex has the same in-degree as out-degree.
 	
@@ -471,11 +488,13 @@ How to check if a directed graph is Eulerian?
 		- This is the start vertex
 	- The other vertex must have an in-degree 1 larger than its out-degree
 		- This is the end vertex
+```
 
 ## Hierholzer’s Algorithm
 For finding Eulerian Circuits in O(E+V) time complexity.
 
 Algorithm for undirected graphs:
+```
 - Start with an empty stack and an empty circuit (Eulerian path).
 	- If all vertices have even degree - choose any of them.
 	- If there are exactly 2 vertices having an odd degree - choose one of them.
@@ -487,8 +506,10 @@ Algorithm for undirected graphs:
 	- Add it to circuit, pop the next vertex from the stack 
 - Repeat until the current vertex has no more neighbors and the stack is empty.
 - Note that obtained circuit will be in reverse order - from end vertex to start vertex.
+```
 
 Algorithm for directed graphs:
+```
 - Start with an empty stack and an empty circuit
 	- If all vertices have same out-degrees as in-degrees - choose any of them.
 	- Otherwise choose the vertex whose out-degree is 1 larger than its in-degree.
@@ -498,7 +519,8 @@ Algorithm for directed graphs:
 - If current vertex has out edges:
 	- Add the vertex to the stack, take any of its neighbors, remove the edge between that vertex and selected neighbor, and set that neighbor as the current vertex.
 	- Repeat until the current vertex has no more out edges and the stack is empty.
-	
+```
+
 ## Fleury’s Algorithm
 Like Hierholzer's algorithm, Fleury's algorithm is used for finding Eulerian Trial/Cycles. Fluery's has worse time complexity with O((E+V)^2), but it is easier to implement for Eulerian trail problems.
 
