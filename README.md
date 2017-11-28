@@ -11,12 +11,16 @@ Will include topic notes as they are finished being formatted.
 	  - Deterministic Selection for guaranteed O(N)
 	- [Recursive Bottom Up Merge Sort](#bottom-up-merge-sort)
 	  - Used to sort array in-place with constant space
-  
 - ## Strings:
 	- [Rabin–Karp](#rabin-karp)
+	- Sliding Window Technique
 - ## Trees:
 	- [Prefix Tree (Trie)](#prefix-tree)
-	
+- ## Math:
+	- [P, NP, NP-Completeness](#p-np-np-completeness)
+	- [Generating Permutations](#generating-permutations)
+	- [Counting](#counting)
+	- Master Theorem
 - ## Graphs:
 - ### Basics:
 	- [Connected Components](#connected-components)
@@ -186,6 +190,160 @@ Algorithm:
 	- Compare hash values of s and the window
 	- If no match, remove first character and add the next character
 ```
+# Math
+## P, NP, NP-Completeness
+Definitions from Erik Demaine's MIT 6.006 lecture video:
+- **P** = {problems that can be solved in polynomial time}
+- **NP** = {decision problems solvable in polynomial time via a "lucky" algorithm}
+	- **Lucky algorithm**: a magical algorithm that always makes a right guess among the given set of choices
+	- Another definition: **NP** = {decision problems with solutions that can be verified in polynomial time}
+		- Verified meaning can prove it and check the proof in polynomial time
+- **EXP** = {problems that can be solved in exponential time 2^n^c}
+- **RE** = {problems solvable in finite time}
+- **NP-Hard** is NP and above.
+- **NP-Complete** is NP and also in NP-hard.
+- **Weakly NP-complete** are NP-complete problems with peseudo-polynomial time algorithms
+- **P != NP**: can be thought of as "can't engineer luck". Generating (proofs of) solutions can be harder than checking them.
+
+Assuming **P != NP**: P ⊂ NP ⊂ EXP ⊂ RE
+
+A **nondeterministic algorithm** is an algorithm that, even for the same input, can exhibit different behaviors on different runs.
+Nondeterministic algorithms are often used to find an approximation to a solution, when the exact solution would be too costly to obtain using a deterministic one.
+
+**The nondeterministic model**:
+```
+- Algorithm makes guesses
+	- List of choices, and a choice is determined, and says yes/no
+- Guesses are guaranteed to lead to a yes if possible
+```
+
+**Pseudo-Polynomial**: A numeric algorithm runs in pseudo-polynomial time if it is polynomial in the value of the input but exponential in the size of input.
+- Key point here is for numeric algorithms, size refers to length of the binary string
+
+For example in the given function below:
+```
+- For n in range(3127):
+	- Do something that is O(1)
+```
+The size of the input is not 3127, but rather Log(3127), which is approximately 12 bits long. Thus the time complexity is O(2^Log(N)), which is exponential.  
+
+## Generating Permutations
+For generating permutations in lexicographic order:
+```
+- Initialize a list P
+- While P != reverse(P):
+	- P = GetNext(P)
+- Output P
+```
+The GetNext() function works as follows:
+```
+- Find the largest index k such that nums[k] < nums[k + 1]. 
+- If no such index exists, then the permutation is sorted in descending order, just reverse it. 
+ 	- For example, the next permutation of [3, 2, 1] is [1, 2, 3].
+- Find the largest index l greater than k such that nums[k] < nums[l].
+- Swap the value of nums[k] with that of nums[l].
+- Reverse the sequence from nums[k + 1] up to and including the last element in the array.
+```
+E.g. for the set (8,2,5,3,7,6,4,1):
+- Find the largest value that has a larger after it
+	- 3 is the largest k
+		- Since the only choices are 2 and 3
+		- 2 < 5 and 3 < 7
+- Then we look for the next value larger than Pk that is as closest to the end
+	- In other words, the highest j value where Pj > Pk and j > k
+	- In this case j is 4 
+- Swap Pj and Pk
+	- (8, 2, 5, **4**, 7, 6, **3**, 1)
+- Then reverse the order of Pk+1 to end:
+	- (8, 2, 5, 4, **1, 3, 6, 7**)
+	
+## Counting
+<img src="https://i.imgur.com/sLUOSpk.png=250px" height="70%" width="70%"><br>
+### The Product Rule:
+	- Cartesian product of the sets
+	- |S1|x|S2|x..|Sn|
+	- E.g. Picking lunch combinations
+		○ |Entrees| x |Sides| x |Drinks|
+	- However if picking an element decreases the number of choices…
+		○ E.g. picking distinct pin numbers of length 4
+			§ 10 * 9 * 8 * 7
+			§ Since once we pick a number we cannot use it again
+		○ This is an r-permutation, P(n, k), n choose k
+		○ From n choices, choose k
+			- n!/(n−k)!
+### Counting Strings:
+	- Essentially product rule
+	- Set of choices is {0, 1}
+	- For length n, 2n
+
+### The Sum Rule:
+	- Picking 1 from the union of two sets
+	- E.g. |Drinks| = |Hot Drinks| + |Cold Drinks|
+	- |Entrees| x |Sides| x |Drinks|
+
+### Counting Passwords:
+	- E.g. how many passwords of length 7
+		○ If password must be under case letters or digits
+		○ 10 digits (0-9), 26 letters in alphabet
+		○ 36 choices at any index in the string
+			§ Therefore 367 possible combinations
+		○ If string must start with a letter
+			§ 26 * 367
+	- E.g. how many passwords of length 6,7, or 8?
+		○ Sum Rule
+			- Passwords of length 6 + length 7 + length 8
+			- 366 + 367 + 368 
+
+### Counting Subsets:
+	- When order doesn't matter
+	- This is an combination C(n, r)
+	- n!/r!(n−r)!
+	- From n distinct choices, pick r identical roles
+	- E.g. student council from students
+		○ Students are distinct, student council role is not C(100, 10)
+	- E.g. 10 same prizes to distribute to students, with at most 1 per person
+		○ If prizes were distinct we would use permutation P(100, 10)
+		○ If at most 1 per person was not a restriction, choices do not decrease 
+
+### Counting Strings with subsets:
+	- E.g. how phone numbers of length 10 have exactly three 2s?
+	- C(10, 2) * 97 
+	- This is because we cannot select any more 2's after three of them, so the set of choices becomes {0, 1, 3, 4, 5, 6, 7, 8, 9} with a cardinality of 9.
+	- We have picked 3 digits already, so there are only 7 more choices left.
+		○ Product rule gives us 97 
+		
+### Counting by Complement:
+	- How many selections have at least something.
+	- E.g. how many 5-card hands have exactly 1 club
+		○ 52 cards in a deck, 12 cards in a suite
+		○ Find how 5-card hands do not have any clubs
+			§ C(39, 12)
+			§ We then subtract this from the total amount of 5-card hands
+		○ So C(52, 12) - C(39, 12)
+
+### Permutations with Repetition:
+	- If all items are distinct, it is the factorial of the amount of items
+	- If there are repeating item, for reach repeating item, divide by factorial of it
+	- For example, for MISSISSIPPI
+		○ 11 characters, so 11!
+		○ 4 Is, 4 Ss, 2 Ps
+		○ 11! / (4!4!2!)
+		○ Can also be written as C(11, 4) x C(7, 4) x C(3, 2) x C(1, 1)
+	- General Rule is:
+		○ R1 copies of ck
+		○ R2 copies of ck
+		○ Rk copies of ck
+		○ C(n, r1) x C(n-r1, r2) …
+	- Another way is:
+		- n!/((R)!(R2)!..(Rk)!)
+		
+### Counting Subsets with Repetition
+	- Think in terms of binary strings
+	- 0s sectioned off by 1s
+	- 0001000100 
+	- The number of ways to select n items from m varieties (distinct choices):
+		C(n + m - 1, m - 1)
+		
 # Trees
 ## Prefix Tree
 Also known as a trie. 
