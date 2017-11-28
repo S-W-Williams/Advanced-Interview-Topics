@@ -1,7 +1,9 @@
 # Advanced Interview Topics
-I found many of the interview study guides I came across to be lacking in topics beyond basic data structures and common algorithms. This is my compilation of more advanced topics/concepts that may be asked at Google/Facebook and other companies that have interviews on the harder end.
+I found many of the interview study guides I came across to be lacking in topics beyond basic data structures and common algorithms. This is my compilation of notes on the more advanced topics/concepts that may be asked at companies who give interviews on the harder end.
 
-Will include topic notes as they are finished being formatted.
+Also see my [write ups](https://github.com/S-W-Williams/Advanced-Interview-Topics/blob/master/Solutions%20and%20Writeups/README.md) of problems that I found to have especial significance. 
+
+Will update with additional notes incrementally as they are done being formatted.
 
 # Table of Contents
 
@@ -81,6 +83,11 @@ Will include topic notes as they are finished being formatted.
 	- Convex Hulls
 		- Used to solve Maximum-Density Segment Problem
 	- Closest pairs
+
+- ## Famous Problems:
+	- [Huffman coding](#huffman-encoding)
+	- [Set Cover](#set-cover)
+	- [Knight's Tour](#knights-tour]
 	
 # Arrays
 ## Selection Algorithms
@@ -766,3 +773,88 @@ If we have a choice between a bridge and a non-bridge, always choose the non-bri
 
 This can be implemented by checking if removing a given edge between v and u will make u have a degree of 0. The algorithm stops when there are not more edges.
 
+# Famous Problems
+## Huffman Coding:
+Greedy algorithm for text compression. O(N Log N) time complexity where n is the number of unique characters.
+
+Idea is to assign variable-length codes to input characters, lengths of the assigned codes are based on the frequencies of corresponding characters. The most frequent character gets the smallest code and the least frequent character gets the largest code. 
+
+Must keep prefix-free property: no code can be a prefix of another.
+
+Two parts:
+```
+- Build a Huffman Tree from input characters.
+- Traverse the Huffman Tree and assign codes to characters.
+```
+To build the Huffman Tree:
+```
+- Create a node for every unique character in string S storing the character and its frequency.
+- Put all nodes in into a priority queue
+- While there are 2 items in the queue:
+	○ Extract the min t1
+	○ Extract the min t2
+	○ Create a node with left of t1 and right of t2, and value is t1 + t2
+	○ Enqueue this node (note how this node stores no character)
+- When there is 1 item left in the queue, that node is the root of the our tree.
+```
+Assign codes to characters:
+```
+- We traverse the tree starting from the root.
+- Every left branch adds a 0 to the end of the code
+- Every right branch adds a 1 to the end of the code
+- We arbitrarily choose the assignments, left can also be 1 as long as right is 0. 
+- When we reach a leaf node, the leaf stores the character associated with they key built from traversing to it
+```
+To decode we run the string through the tree. For every 0 we got left, every 1 we go right. Once we reach a leaf, store the character and start over from the root.
+
+An example of a Huffman tree:
+<br><img src="https://i.imgur.com/LfRqswX.png" height="50%" width="50%"><br>
+
+## Set Cover
+Given a universe U of n elements, a collection of subsets of U say S = {S1, S2…,Sm} where every subset Si has an associated cost. Find a minimum cost sub collection of S that covers all elements of U.
+
+NP-complete problem. Greedy algorithm can only approximate. 
+
+Greedy approach is:
+- In each step, choose the set Si containing the most uncovered points. Repeat until all points are covered.
+
+Suppose: 
+```
+- S1 = {1, 2, 3, 8, 9, 10}
+- S2 = {1, 2, 3, 4, 5}
+- S3 = {4, 5, 7}
+- S4 = {5, 6, 7}
+- S5 = {6, 7, 8, 9, 10}
+```
+Our Greedy algorithm selects the largest set, S1 = {1, 2, 3, 8, 9, 10}. 
+Excluding the points from the sets already selected, we are left with the sets:
+	- {4, 5}, {4, 5, 7}, {5, 6, 7}, and {6, 7}. 
+	
+At best, we must select two of these remaining sets for their union to encompass all possible points, resulting in a total of 3 sets. 
+The greedy algorithm could now pick the set {4, 5, 7}, followed by the set {6}.
+
+## Knight's Tour
+Backtracking problem. A knight's tour is a sequence of moves of a knight on a chessboard such that the knight visits every square only once. 
+
+The knight's tour problem is an instance of the more general Hamiltonian path problem in graph theory. Unlike the Hamiltonian path problem, the knight's tour problem can be solved in linear time.
+
+Backtracking approach:
+```
+- If all squares are visited 
+	○ print the solution
+- Else
+	○ Add one of the next moves to solution vector and recursively check if this move leads to a solution.
+		§ (A Knight can make maximum eight moves. We choose one of the 8 moves in this step).
+	○ If the move chosen in the above step doesn't lead to a solution then remove this move from the solution vector and we try other moves.
+	○ If none of the alternatives work then return false.
+		§ Returning false will remove the previously added item in recursion. 
+		§ If false is returned by the initial call of recursion then "no solution exists"
+```
+Linear solution is Warnsdorf's rule:
+```
+- We can start from any initial position of the knight on the board.
+- We always move to an adjacent, unvisited square with minimal degree
+	- degree means number of unvisited adjacent
+```
+Significance of Warnsdorf's rule:
+- Although the Hamiltonian path problem is NP-hard in general, on many graphs that occur in practice this heuristic is able to successfully locate a solution in linear time. The knight's tour is a special case.
