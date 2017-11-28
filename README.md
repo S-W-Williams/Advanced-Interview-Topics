@@ -18,6 +18,8 @@ Will update with additional notes incrementally as they are done being formatted
 	- Sliding Window Technique
 - ## Trees:
 	- [Prefix Tree (Trie)](#prefix-tree)
+	- Segment Tree
+	- Binary Index Tree (Fenwick Tree)
 - ## Math:
 	- [P, NP, NP-Completeness](#p-np-np-completeness)
 	- [Generating Permutations](#generating-permutations)
