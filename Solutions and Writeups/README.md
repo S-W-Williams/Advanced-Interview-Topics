@@ -26,7 +26,7 @@ That example doesn't quite show why topological sort is needed because the nodes
 ## Minimum Height Trees
 [LeetCode #310](https://leetcode.com/problems/minimum-height-trees/description/)
 
-This question was hard to understand since I was unfamiliar with the properties of rooted trees. The key to this problem is knowing that there can only be either 1 or 2 nodes that are root of a minimum height tree in a graph.
+This question was hard to understand since I was unfamiliar with the properties of rooted trees. The key to this problem is knowing that there can only be either 1 or 2 nodes that are the root of a minimum height tree in a graph.
 
 The algorithm is to remove leaf nodes one layer at a time and stop when only 1 or 2 nodes remain. The resulting nodes are the nodes of the minimum height trees. We can use a queue, enqueue all current leaf nodes, then as they are removed enqueue any neighbor whose new degree is 1. Removing a node in this case means decreasing the degrees of all its neighbors and the total vertex count by 1. Note that the loop condition refers to the total vertex not the length of the queue.
 
