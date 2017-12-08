@@ -1,6 +1,27 @@
 # Coding Problem Solutions
 This is a compilation of my write ups of coding problems that I found valuable.
 
+# Manipulation
+## Gray Code
+[LeetCode #89](https://leetcode.com/problems/gray-code/description/)
+
+This problem can be solved using backtracking/DFS, but it is better to just learn what Gray code (aka reflected binary code) is. 
+https://www.allaboutcircuits.com/technical-articles/gray-code-basics/
+
+From Wikipedia:
+```
+/*
+ * This function converts an unsigned binary
+ * number to reflected binary Gray code.
+ *
+ * The operator >> is shift right. The operator ^ is exclusive or.
+ */
+unsigned int binaryToGray(unsigned int num)
+{
+    return num ^ (num >> 1);
+}
+```
+
 # Graph Problems
 ## Evaluate Division
 [LeetCode #399](https://leetcode.com/problems/evaluate-division/description/)
