@@ -1,7 +1,7 @@
 # Advanced Interview Topics
 I found many of the interview study guides I came across to be lacking in topics beyond basic data structures and common algorithms. This is my compilation of notes on the more advanced topics/concepts that may be asked at companies who give interviews on the harder end.
 
-Also see my [write ups](https://github.com/S-W-Williams/Advanced-Interview-Topics/blob/master/Solutions%20and%20Writeups/README.md) of problems that I found to have especial significance. 
+Also see my [write ups](https://github.com/S-W-Williams/Advanced-Interview-Topics/blob/master/Solutions%20and%20Writeups/README.md) of problems that I found to be valuable. 
 
 Will update with additional notes incrementally as they are done being formatted.
 
@@ -11,7 +11,7 @@ Will update with additional notes incrementally as they are done being formatted
 	- [Selection Algorithms](#selection-algorithms)
 	  - Quickselect for finding kth smallest element
 	  - Deterministic Selection for guaranteed O(N)
-	- [Recursive Bottom Up Merge Sort](#bottom-up-merge-sort)
+	- [Iterative Bottom Up Merge Sort](#bottom-up-merge-sort)
 	  - Used to sort array in-place with constant space
 - ## Strings:
 	- [Rabin–Karp](#rabin-karp)
@@ -149,35 +149,6 @@ while m < n do
 		i = i + 2 * m
 	m = m * 2
 ```
-
-An implemention I managed to come up with:
-```python
-def inplaceMergeSort(a):
-    if len(a) < 2:
-        return a
-    m = 1
-    while m < (len(a) - 1) // 2:
-        i = 0
-        while i + m < len(a):
-            j = i
-            while j < i + m:
-                if a[j] > a[i+m]:
-                    a[j],a[i+m] = a[i+m],a[j]
-                j += 1
-            i += 2*m
-        m *= 2
-    i = m
-    j = 0
-    while i < len(a):
-        if a[j] > a[i]:
-            a[j],a[i] = a[i],a[j]
-        j += 1
-        if j == i:
-            i += 1
-    return 
-```
-
-In the final loop, we start storing the final sorted subarray at index 0, and every time we increment the size. Once the final sorted subarray is bigger than the sorted left size, we start taking elements from the right side and then also decreasing the size of the subarray.
 
 # Strings
 ## Rabin-Karp
