@@ -1,10 +1,3 @@
-# Advanced Interview Topics
-I found many of the interview study guides I came across to be lacking in topics beyond basic data structures and common algorithms. This is my compilation of notes on the more advanced topics/concepts that may be asked at companies who give interviews on the harder end.
-
-Also see my [write ups](https://github.com/S-W-Williams/Advanced-Interview-Topics/blob/master/Solutions%20and%20Writeups/README.md) of problems that I found to be valuable. 
-
-Will update with additional notes incrementally as they are done being formatted.
-
 # Table of Contents
 
 - ## Arrays:
