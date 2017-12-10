@@ -1,7 +1,7 @@
-# Coding Problem Solutions
-This is a compilation of my write ups of coding problems that I found valuable.
+# Pratice Problem Solutions
+Compilation of my write ups for coding problems that I found valuable.
 
-# Manipulation
+# Bit Manipulation
 ## Gray Code
 [LeetCode #89](https://leetcode.com/problems/gray-code/description/)
 
@@ -26,7 +26,7 @@ unsigned int binaryToGray(unsigned int num)
 ## Evaluate Division
 [LeetCode #399](https://leetcode.com/problems/evaluate-division/description/)
 
-It took me a while to see but this is a graph problem; the numerators and denominators are vertices and the equations are weighted edges. There are other solutions that involve putting the values in another data tructure and then doing DFS/BFS search, but looking at the queries we can see this is a variation of the all-pairs shortest path problem. I think this problem is trying to test if we know Floyd-Warshall. Floyd–Warshall is actually very easy to memorize - we test every edge for every pair. I have more details written up in my graph notes, but the main part of the algorithm is:
+This is straightfoward to solve as a graph problem; the numerators and denominators are vertices and the equations are weighted edges. There are other solutions that involve putting the values in another data tructure and then doing DFS/BFS search, but looking at the queries we can see this is a variation of the all-pairs shortest path problem. I think this problem is trying to test if we know Floyd-Warshall. Floyd–Warshall is actually very easy to memorize - we test every edge for every pair. I have more details written up in my graph notes, but the main part of the algorithm is:
 ```python
 for k from 1 to |V|:
   for i from 1 to |V|:
@@ -47,7 +47,7 @@ That example doesn't quite show why topological sort is needed because the nodes
 ## Minimum Height Trees
 [LeetCode #310](https://leetcode.com/problems/minimum-height-trees/description/)
 
-This question was hard to understand since I was unfamiliar with the properties of rooted trees. The key to this problem is knowing that there can only be either 1 or 2 nodes that are the root of a minimum height tree in a graph.
+This question is hard to understand if unfamiliar with the properties of rooted trees. The key to this problem is knowing that there can only be either 1 or 2 nodes that are the root of a minimum height tree in a graph.
 
 The algorithm is to remove leaf nodes one layer at a time and stop when only 1 or 2 nodes remain. The resulting nodes are the nodes of the minimum height trees. We can use a queue, enqueue all current leaf nodes, then as they are removed enqueue any neighbor whose new degree is 1. Removing a node in this case means decreasing the degrees of all its neighbors and the total vertex count by 1. Note that the loop condition refers to the total vertex not the length of the queue.
 
@@ -55,7 +55,7 @@ The algorithm is to remove leaf nodes one layer at a time and stop when only 1 o
 ## Next Permutation
 [LeetCode #31](https://leetcode.com/problems/next-permutation/description/)
 
-This problem just requires an implementation of the next lexicographic permutation algorithm. We can of course come up with our own logic to solve it, but I'm guessing the interviewer will be more pleased if we identify that there is an algorithm for the problem. The algorithm from Wikipedia is:
+This problem just requires implementation of the next lexicographic permutation algorithm. We can of course come up with our own logic to solve it, but I'm guessing the interviewer will be more pleased if we identify that there is an algorithm for the problem. The algorithm from Wikipedia is:
 
 ```
 - Find the largest index k such that nums[k] < nums[k + 1]. 
@@ -70,14 +70,14 @@ This problem just requires an implementation of the next lexicographic permutati
 ## Unique Binary Search Trees
 [LeetCode #96](https://leetcode.com/problems/unique-binary-search-trees/description/)
 
-This is one of the problems where its better to just know the math formula for it. This is an application of the Catalan numbers. From Wikipedia: "Cn is the number of non-isomorphic ordered trees with n vertices. (An ordered tree is a rooted tree in which the children of each vertex are given a fixed left-to-right order.)"
+This is one of the problems where its better to just know the formula for it. This is an application of the Catalan numbers. From Wikipedia: "Cn is the number of non-isomorphic ordered trees with n vertices. (An ordered tree is a rooted tree in which the children of each vertex are given a fixed left-to-right order.)"
 ```
 Cn = (2n)!/(n+1)!n!
 ```
 ## Binary Tree Maximum Path Sum
 [LeetCode #124](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/)
 
-So the way I thought of this problem is we are finding the maximum path for a node's left and right subtrees, and then combining them with the node to form the maximum path for the entire tree. However there are some conditions we have to be aware of:
+The way I thought of this problem is we are finding the maximum path for a node's left and right subtrees, and then combining them with the node to form the maximum path for the entire tree. However there are some conditions we have to be aware of:
 - A single node can be the maximum path for the entire tree
 - The root may not be part of the final maximum path
 
@@ -93,6 +93,6 @@ My solution beats 99.38% of other Python solutions. Looking at the others, I thi
 ## Climbing Stairs
 [LeetCode #70](https://leetcode.com/problems/climbing-stairs/description/)
 
-This problem is easy but it initially stumped me because I thought there would be more to the relation. The total number of ways to reach i^th step is equal to sum of the ways of reaching the (i - 1)^th and (i - 2)^th step.
+This problem is easy but it is over to think the recurrence relation. The total number of ways to reach i^th step is equal to sum of the ways of reaching the (i - 1)^th and (i - 2)^th step.
 
-Thus, the dp relation can be written as dp[i] = dp[i−1] + dp[i−2]. Even simpler, this is the Fibonacci sequence.
+Thus, the dp relation can be written as dp[i] = dp[i−1] + dp[i−2]. This is just the Fibonacci sequence.
