@@ -42,6 +42,7 @@
 - ### Minimum Spanning Trees:
 	- [Kruskal's](#kruskals-algorithm)
 	- [Prim's](#prims-algorithm)
+	- Borůvka's
 	- Edmonds' (arborescences)
 
 - ### Independent Sets
