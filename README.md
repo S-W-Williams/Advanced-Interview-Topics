@@ -55,7 +55,7 @@
   - Widest Path problem
 
 - ### Eulerian Graphs:
-  - [Trails/Cycles](#eulerian-graphs-1)
+  - [Trails and Cycles](#eulerian-trails-and-cycles)
   - [Hierholzer's Algorithm](#hierholzers-algorithm)
   - [Fleury’s Algorithm](#fleurys-algorithm)
 
@@ -618,7 +618,8 @@ class DisjointSet:
         return
 ```
 
-## Dijkstra's Shortest Path Algorithm
+## Dijkstra’s Shortest Path Algorithm
+
 Implementation can vary a lot. Most textbooks give the pseudo-code for the version that uses a min-heap and decrease-key method. However, decrease-key requires extra space to keep track of the location of each node in the heap. Implementations that uses heaps have a time complexity of O((E + V) Log V), which can be simplified to O(E Log V) for connected graphs.
 
 Other version is to simply enqueue the neighbor whenever a new minimum is found. Time complexity for the priority queue will be O(E), so time complexity will still be O(E Log V). 
@@ -668,7 +669,7 @@ Bellman-Ford:
 Loop one more time, and if any shorter distances are found, we know a negative cycle exists. 
 ```
 
-## Kruskal's Algorithm
+## Kruskal’s Algorithm
 Greedy algorithm for finding minimum spanning tree of a graph. Time complexity is O(|E| log |V|).
 
 Idea is to start with an empty tree T, and while the size of T is |V| - 1 edges,
@@ -693,7 +694,7 @@ To find a MST (there can be multiple) in a graph G:
 The reason we stop when size of T is equal to |V| - 1 is each vertex in an MST can only have one edge connecting it to another vertex. The amount of edges |E| in a connected graph cannot be less than |V| - 1, so we do not need to check if the priority queue is empty. If we are given a graph with more than one connected component then this does not apply.
 
 
-## Prim's Algorithm
+## Prim’s Algorithm
 Greedy algorithm for finding minimum spanning tree in an undirected graph. Idea is to start out with a vertex, and repeatedly add the next reachable vertex with the lowest edge cost until all vertices are in the MST.
 
 When implemented using a Fibonacci heap its time complexity is O(E + V Log V), otherwise O(E Log V).
@@ -706,8 +707,9 @@ If implemented using a heap, we must enqueue all vertices at the beginning. The 
 
 Can also be implemented using a priority queue with a set keeping track of visited vertices. Visited means the vertex has been popped from the queue. We only update and enqueue neighboring vertices of a vertex if it has not been visited and has a shorter distance than what is stored in the distance dictionary. 
 
-## Eulerian Graphs
+## Eulerian Trails and Cycles
 An Euler trail:
+
 - visits every edge in the graph exactly once (vertices may well be crossed more than once)
 - is a trail that crosses every edge exactly once without repeating, if it ends at the initial vertex then it is a Euler cycle.
 
@@ -841,7 +843,7 @@ Excluding the points from the sets already selected, we are left with the sets:
 At best, we must select two of these remaining sets for their union to encompass all possible points, resulting in a total of 3 sets. 
 The greedy algorithm could now pick the set {4, 5, 7}, followed by the set {6}.
 
-## Knight's Tour
+## Knight’s Tour
 Backtracking problem. A knight's tour is a sequence of moves of a knight on a chessboard such that the knight visits every square only once. 
 
 The knight's tour problem is an instance of the more general Hamiltonian path problem in graph theory. Unlike the Hamiltonian path problem, the knight's tour problem can be solved in linear time.
