@@ -1,90 +1,131 @@
 # Table of Contents
 
 - ## Arrays:
-	- [Selection Algorithms](#selection-algorithms)
-	  - Quickselect for finding kth smallest element
-	  - Deterministic Selection for guaranteed O(N)
-	- [Iterative Bottom Up Merge Sort](#bottom-up-merge-sort)
-	  - Used to sort array in-place with constant space
+  - [Selection Algorithms](#selection-algorithms)
+    - Quickselect for finding kth smallest element
+    - Deterministic Selection for guaranteed O(N)
+  - [Iterative Bottom Up Merge Sort](#bottom-up-merge-sort)
+    - Used to sort array in-place with constant space
+  - Circular Array
+  - Suffix Array
+  - Dutch National Flag Problem
+  - Open Addressing
+
 - ## Strings:
-	- [Rabin–Karp](#rabin-karp)
-	- Sliding Window Technique
+  - [Rabin–Karp](#rabin-karp)
+  - Rolling Hash
+  - Sliding Window Technique
+
 - ## Trees:
-	- [Prefix Tree (Trie)](#prefix-tree)
-	- Segment Tree
-	- Binary Index Tree (Fenwick Tree)
+  - [Prefix Tree (Trie)](#prefix-tree)
+  - Segment Tree
+  - Binary Index Tree (Fenwick Tree)
+  - Recursive Traversals
+  - Iterative Traversals
+  - Tree Reconstruction From Traversals
+  - Threaded Binary Trees
+  - Self-Balancing BSTs
+  - Fibonacci Heap
+
 - ## Math:
-	- [P, NP, NP-Completeness](#p-np-np-completeness)
-	- [Generating Permutations](#generating-permutations)
-	- [Counting](#counting)
-	- Master Theorem
+  - [P, NP, NP-Completeness](#p-np-np-completeness)
+  - Discrete Probability
+  - [Generating Permutations](#generating-permutations)
+  - [Counting](#counting)
+  - Master Theorem
+  - Euclidean Algorithm
+  - Modular Exponentiation
+  - Karatsuba Multiplication
+
 - ## Graphs:
+
 - ### Basics:
-	- [Connected Components](#connected-components)
-	- [Strongly Connected Components](#strongly-connected-components)
-	- [Topological Sorting](#topological-sort)
-	- [Disjoint-Set (Union-Find)](#disjoint-set-union-find)
-	- Biconnected Components
-	
+  - [Connected Components](#connected-components)
+  - [Strongly Connected Components](#strongly-connected-components)
+  - [Topological Sorting](#topological-sort)
+  - [Disjoint-Set (Union-Find)](#disjoint-set-union-find)
+  - Biconnected Components
+
 - ### Paths:
-	- [Dijkstra's](#dijkstras-shortest-path-algorithm)
-	- [Bellman-Ford](#bellman-ford)
-	- A*
-	- Floyd-Warshall
-	- Johnson's Algorithm
-	- Widest Path problem
+  - [Dijkstra's](#dijkstras-shortest-path-algorithm)
+  - [Bellman-Ford](#bellman-ford)
+  - A*
+  - Floyd-Warshall
+  - Johnson's Algorithm
+  - Widest Path problem
 
 - ### Eulerian Graphs:
-	- [Trails/Cycles](#eulerian-graphs-1)
-	- [Hierholzer's Algorithm](#hierholzers-algorithm)
-	- [Fleury’s Algorithm](#fleurys-algorithm)
+  - [Trails/Cycles](#eulerian-graphs-1)
+  - [Hierholzer's Algorithm](#hierholzers-algorithm)
+  - [Fleury’s Algorithm](#fleurys-algorithm)
 
 - ### Minimum Spanning Trees:
-	- [Kruskal's](#kruskals-algorithm)
-	- [Prim's](#prims-algorithm)
-	- Borůvka's
-	- Edmonds' (arborescences)
+  - [Kruskal's](#kruskals-algorithm)
+  - [Prim's](#prims-algorithm)
+  - Borůvka's
+  - Edmonds' (arborescences)
 
 - ### Independent Sets
-	- Largest Independent Set (Dynamic Programming)
+  - Largest Independent Set (Dynamic Programming)
 
 - ### Bipartite Graphs (pronounced bi·par·tite):
-	- Given a bipartite graph, separate the vertices into two sets
-	- Testing bipartiteness
-	- Maximum Bipartite Matching
-	- Hopcroft–Karp Algorithm
+  - Given a bipartite graph, separate the vertices into two sets
+  - Testing bipartiteness
+  - Maximum Bipartite Matching
+  - Hopcroft–Karp Algorithm
 
 - ### Flows and Cuts: http://www.ics.uci.edu/~goodrich/teach/graph/notes/MaxFlow.pdf
-	- Flow network
-	- Maximum Flow
-	- Ford–Fulkerson/Edmonds–Karp
-	- Minimum Cuts
-	- Max-Flow and Min-Cut
+  - Flow network
+  - Maximum Flow
+  - Ford–Fulkerson/Edmonds–Karp
+  - Minimum Cuts
+  - Max-Flow and Min-Cut
 
 - ### Matchings:
-	- Stable marriage
-	- Gale–Shapley
+  - Stable marriage
+  - Gale–Shapley
 
 - ### Graph Coloring:
-	- Greedy coloring
-	- 4-color theorem
-	- 5-color theorem
-	- k-degenerate graph
+  - Greedy coloring
+  - 4-color theorem
+  - 5-color theorem
+  - k-degenerate graph
 
 - ### Miscellaneous:
-	- Small-world network
-	- Arboricity
+  - Small-world network
+  - Arboricity
 
 - ## Computational Geometry:
-	- Convex Hulls
-		- Used to solve Maximum-Density Segment Problem
-	- Closest pairs
+  - Convex Hulls
+    - Used to solve Maximum-Density Segment Problem
+  - Closest pairs
 
-- ## Famous Problems:
-	- [Huffman coding](#huffman-encoding)
-	- [Set Cover](#set-cover)
-	- [Knight's Tour](#knights-tour]
-	
+- ## Dynamic Programming
+
+  - Shortest/Longest Path in DAGs
+  - 0/1 Knapsack
+  - Weighted Interval Scheduling
+  - Coin Change
+  - Chain Matrix Multiplication
+  - Edit Distance
+  - Longest Increasing Subsequence
+  - Longest Common Subsequence
+
+- ## Bit Manipulation
+
+  - Bits and Bytes
+  - Counting Set Bits
+
+- ## Famous Problems/Applications:
+
+  - [Huffman encoding](#huffman-encoding)
+  - [Set Cover](#set-cover)
+  - [Knight's Tour](#knights-tour)
+  - N-Queens
+  - Rat in a Maze
+  - Traveling Salesman
+  - Route Inspection
+
 # Arrays
 ## Selection Algorithms
 An example of a selection problem is selecting the kth smallest element from an unsorted collection of n elements. Can be solved in O(N Log N) time using sorting, but we can do better.
@@ -169,9 +210,9 @@ Algorithm:
 Definitions from Erik Demaine's MIT 6.006 lecture video:
 - **P** = {problems that can be solved in polynomial time}
 - **NP** = {decision problems solvable in polynomial time via a "lucky" algorithm}
-	- **Lucky algorithm**: a magical algorithm that always makes a right guess among the given set of choices
-	- Another definition: **NP** = {decision problems with solutions that can be verified in polynomial time}
-		- Verified meaning can prove it and check the proof in polynomial time
+  - **Lucky algorithm**: a magical algorithm that always makes a right guess among the given set of choices
+  - Another definition: **NP** = {decision problems with solutions that can be verified in polynomial time}
+    - Verified meaning can prove it and check the proof in polynomial time
 - **EXP** = {problems that can be solved in exponential time 2^n^c}
 - **RE** = {problems solvable in finite time}
 - **NP-Hard** is NP and above.
@@ -220,17 +261,17 @@ The GetNext() function works as follows:
 ```
 E.g. for the set (8,2,5,3,7,6,4,1):
 - Find the largest value that has a larger after it
-	- 3 is the largest k
-		- Since the only choices are 2 and 3
-		- 2 < 5 and 3 < 7
+  - 3 is the largest k
+    - Since the only choices are 2 and 3
+    - 2 < 5 and 3 < 7
 - Then we look for the next value larger than Pk that is as closest to the end
-	- In other words, the highest j value where Pj > Pk and j > k
-	- In this case j is 4 
+  - In other words, the highest j value where Pj > Pk and j > k
+  - In this case j is 4 
 - Swap Pj and Pk
-	- (8, 2, 5, **4**, 7, 6, **3**, 1)
+  - (8, 2, 5, **4**, 7, 6, **3**, 1)
 - Then reverse the order of Pk+1 to end:
-	- (8, 2, 5, 4, **1, 3, 6, 7**)
-	
+  - (8, 2, 5, 4, **1, 3, 6, 7**)
+
 ## Counting
 <img src="https://i.imgur.com/sLUOSpk.png=250px" height="70%" width="70%"><br>
 ### The Product Rule:
@@ -285,7 +326,7 @@ E.g. for the set (8,2,5,3,7,6,4,1):
 	- This is because we cannot select any more 2's after three of them, so the set of choices becomes {0, 1, 3, 4, 5, 6, 7, 8, 9} with a cardinality of 9.
 	- We have picked 3 digits already, so there are only 7 more choices left.
 		○ Product rule gives us 97 
-		
+
 ### Counting by Complement:
 	- How many selections have at least something.
 	- E.g. how many 5-card hands have exactly 1 club
@@ -310,14 +351,14 @@ E.g. for the set (8,2,5,3,7,6,4,1):
 		○ C(n, r1) x C(n-r1, r2) …
 	- Another way is:
 		- n!/((R)!(R2)!..(Rk)!)
-		
+
 ### Counting Subsets with Repetition
 	- Think in terms of binary strings
 	- 0s sectioned off by 1s
 	- 0001000100 
 	- The number of ways to select n items from m varieties (distinct choices):
 		C(n + m - 1, m - 1)
-		
+
 # Trees
 ## Prefix Tree
 Also known as a trie. 
@@ -325,18 +366,18 @@ Also known as a trie.
 - O(w) search, w being the length of the query.
 - Space complexity is O(N*K)
 - Easy to implement with a dictionary.
-	○ Textbook implementations generally use an array of the 26 alphabet characters.
+  ○ Textbook implementations generally use an array of the 26 alphabet characters.
 - Every node should also keep track of whether it is the ending letter of a word or not.
 - Root can also be empty node to denote multiple starting prefixes.
 
 Variations: 
 - Ternary search tree (pronounced turn-a-ry):
-	- Type of trie where nodes are ordered like BSTs nodes
-	- 3 children instead of 2
-	- More space efficient at the cost of speed
+  - Type of trie where nodes are ordered like BSTs nodes
+  - 3 children instead of 2
+  - More space efficient at the cost of speed
 - Radix tree 
-	- A compressed trie
-	- Has a variation of it called Patricia tree
+  - A compressed trie
+  - Has a variation of it called Patricia tree
 
 Trie implementation with dictionaries:
 ```python
@@ -796,7 +837,7 @@ Suppose:
 Our Greedy algorithm selects the largest set, S1 = {1, 2, 3, 8, 9, 10}. 
 Excluding the points from the sets already selected, we are left with the sets:
 	- {4, 5}, {4, 5, 7}, {5, 6, 7}, and {6, 7}. 
-	
+
 At best, we must select two of these remaining sets for their union to encompass all possible points, resulting in a total of 3 sets. 
 The greedy algorithm could now pick the set {4, 5, 7}, followed by the set {6}.
 
