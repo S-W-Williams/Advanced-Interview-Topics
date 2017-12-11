@@ -5,9 +5,11 @@ These problems are useful for becoming proficent with the specified data structu
 ## Segment Tree
 - [Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/description/)
 - [Range Sum Query 2D - Mutable](https://leetcode.com/problems/range-sum-query-2d-mutable/description/)
-- [Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/) <br>
+- [Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)
 
-For __Range Query__ problems, use dynamic programming if immutable, otherwise use segment tree if mutable.
+
+
+<p>For __Range Query__ problems, use dynamic programming if immutable, otherwise use segment tree if mutable.<p>
 
 ## Binary Indexed Tree (Fenwick Tree)
 - [Count of Smaller Numbers After Self](https://leetcode.com/problems/count-of-smaller-numbers-after-self/description/)
