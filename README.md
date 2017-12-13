@@ -1,131 +1,131 @@
 # Table of Contents
 
-- ## Arrays:
-  - [Selection Algorithms](#selection-algorithms)
-    - Quickselect for finding kth smallest element
-    - Deterministic Selection for guaranteed O(N)
-  - [Iterative Bottom Up Merge Sort](#bottom-up-merge-sort)
-    - Used to sort array in-place with constant space
-  - Circular Array
-  - Suffix Array
-  - Dutch National Flag Problem
-  - [Open Addressing](#open-addressing)
+## Arrays:
+- [Selection Algorithms](#selection-algorithms)
+  - Quickselect for finding kth smallest element
+  - Deterministic Selection for guaranteed O(N)
+- [Iterative Bottom Up Merge Sort](#bottom-up-merge-sort)
+  - Used to sort array in-place with constant space
+- Circular Array
+- Suffix Array
+- Dutch National Flag Problem
+- [Open Addressing](#open-addressing)
 
-- ## Strings:
-  - [Rabin–Karp](#rabin-karp)
-  - Rolling Hash
-  - Sliding Window Technique
+## Strings:
+- [Rabin–Karp](#rabin-karp)
+- Rolling Hash
+- Sliding Window Technique
 
-- ## Trees:
-  - [Self-Balancing BSTs](#self-balancing-bsts)
-  - [Prefix Tree (Trie)](#prefix-tree)
-  - [B-Tree](#b-tree)
-  - Recursive Traversals
-  - Iterative Traversals
-  - [Tree Reconstruction From Traversals](#tree-reconstruction-from-traversals)
-  - [Threaded Binary Trees](#threaded-binary-trees)
-  - Segment Tree
-  - Binary Index Tree (Fenwick Tree)
-  - [Fibonacci Heaps](fibonacci-heaps)
+## Trees:
+- [Self-Balancing BSTs](#self-balancing-bsts)
+- [Prefix Tree (Trie)](#prefix-tree)
+- [B-Tree](#b-tree)
+- Recursive Traversals
+- Iterative Traversals
+- [Tree Reconstruction From Traversals](#tree-reconstruction-from-traversals)
+- [Threaded Binary Trees](#threaded-binary-trees)
+- Segment Tree
+- Binary Index Tree (Fenwick Tree)
+- [Fibonacci Heaps](fibonacci-heaps)
 
-- ## Math:
-  - [P, NP, NP-Completeness](#p-np-np-completeness)
-  - Discrete Probability
-  - [Generating Permutations](#generating-permutations)
-  - [Counting](#counting)
-  - Master Theorem
-  - Euclidean Algorithm
-  - Modular Exponentiation
-  - Karatsuba Multiplication
+## Math:
+- [P, NP, NP-Completeness](#p-np-np-completeness)
+- Discrete Probability
+- [Generating Permutations](#generating-permutations)
+- [Counting](#counting)
+- Master Theorem
+- Euclidean Algorithm
+- Modular Exponentiation
+- Karatsuba Multiplication
 
-- ## Graphs:
+## Graphs:
 
-- ### Basics:
-  - [Connected Components](#connected-components)
-  - [Strongly Connected Components](#strongly-connected-components)
-  - [Topological Sorting](#topological-sort)
-  - [Disjoint-Set (Union-Find)](#disjoint-set-union-find)
-  - Biconnected Components
+### Basics:
+- [Connected Components](#connected-components)
+- [Strongly Connected Components](#strongly-connected-components)
+- [Topological Sorting](#topological-sort)
+- [Disjoint-Set (Union-Find)](#disjoint-set-union-find)
+- Biconnected Components
 
-- ### Paths:
-  - [Dijkstra's](#dijkstras-shortest-path-algorithm)
-  - [Bellman-Ford](#bellman-ford)
-  - A*
-  - Floyd-Warshall
-  - Johnson's Algorithm
-  - Widest Path problem
+### Paths:
+- [Dijkstra's](#dijkstras-shortest-path-algorithm)
+- [Bellman-Ford](#bellman-ford)
+- A*
+- Floyd-Warshall
+- Johnson's Algorithm
+- Widest Path problem
 
-- ### Eulerian Graphs:
-  - [Trails and Cycles](#eulerian-trails-and-cycles)
-  - [Hierholzer's Algorithm](#hierholzers-algorithm)
-  - [Fleury’s Algorithm](#fleurys-algorithm)
+### Eulerian Graphs:
+- [Trails and Cycles](#eulerian-trails-and-cycles)
+- [Hierholzer's Algorithm](#hierholzers-algorithm)
+- [Fleury’s Algorithm](#fleurys-algorithm)
 
-- ### Minimum Spanning Trees:
-  - [Kruskal's](#kruskals-algorithm)
-  - [Prim's](#prims-algorithm)
-  - Borůvka's
-  - Edmonds' (arborescences)
+### Minimum Spanning Trees:
+- [Kruskal's](#kruskals-algorithm)
+- [Prim's](#prims-algorithm)
+- Borůvka's
+- Edmonds' (arborescences)
 
-- ### Independent Sets
-  - Largest Independent Set (Dynamic Programming)
+### Independent Sets
+- Largest Independent Set (Dynamic Programming)
 
-- ### Bipartite Graphs (pronounced bi·par·tite):
-  - Given a bipartite graph, separate the vertices into two sets
-  - Testing bipartiteness
-  - Maximum Bipartite Matching
-  - Hopcroft–Karp Algorithm
+### Bipartite Graphs (pronounced bi·par·tite):
+- Given a bipartite graph, separate the vertices into two sets
+- Testing bipartiteness
+- Maximum Bipartite Matching
+- Hopcroft–Karp Algorithm
 
-- ### Flows and Cuts: http://www.ics.uci.edu/~goodrich/teach/graph/notes/MaxFlow.pdf
-  - Flow network
-  - Maximum Flow
-  - Ford–Fulkerson/Edmonds–Karp
-  - Minimum Cuts
-  - Max-Flow and Min-Cut
+### Flows and Cuts: http://www.ics.uci.edu/~goodrich/teach/graph/notes/MaxFlow.pdf
+- Flow network
+- Maximum Flow
+- Ford–Fulkerson/Edmonds–Karp
+- Minimum Cuts
+- Max-Flow and Min-Cut
 
-- ### Matchings:
-  - Stable marriage
-  - Gale–Shapley
+### Matchings:
+- Stable marriage
+- Gale–Shapley
 
-- ### Graph Coloring:
-  - Greedy coloring
-  - 4-color theorem
-  - 5-color theorem
-  - k-degenerate graph
+### Graph Coloring:
+- Greedy coloring
+- 4-color theorem
+- 5-color theorem
+- k-degenerate graph
 
-- ### Miscellaneous:
-  - Small-world network
-  - Arboricity
+### Miscellaneous:
+- Small-world network
+- Arboricity
 
-- ## Computational Geometry:
-  - Convex Hulls
-    - Used to solve Maximum-Density Segment Problem
-  - Closest pairs
+## Computational Geometry:
+- Convex Hulls
+  - Used to solve Maximum-Density Segment Problem
+- Closest pairs
 
-- ## Dynamic Programming
+## Dynamic Programming
 
-  - Shortest/Longest Path in DAGs
-  - 0/1 Knapsack
-  - Weighted Interval Scheduling
-  - Coin Change
-  - Chain Matrix Multiplication
-  - Edit Distance
-  - Longest Increasing Subsequence
-  - Longest Common Subsequence
+- Shortest/Longest Path in DAGs
+- 0/1 Knapsack
+- Weighted Interval Scheduling
+- Coin Change
+- Chain Matrix Multiplication
+- Edit Distance
+- Longest Increasing Subsequence
+- Longest Common Subsequence
 
-- ## Bit Manipulation
+## Bit Manipulation
 
-  - Bits and Bytes
-  - Counting Set Bits
+- Bits and Bytes
+- Counting Set Bits
 
-- ## Famous Problems/Applications:
+## Famous Problems/Applications:
 
-  - [Huffman encoding](#huffman-encoding)
-  - [Set Cover](#set-cover)
-  - [Knight's Tour](#knights-tour)
-  - N-Queens
-  - Rat in a Maze
-  - Traveling Salesman
-  - Route Inspection
+- [Huffman encoding](#huffman-encoding)
+- [Set Cover](#set-cover)
+- [Knight's Tour](#knights-tour)
+- N-Queens
+- Rat in a Maze
+- Traveling Salesman
+- Route Inspection
 
 # Arrays
 ## Selection Algorithms
