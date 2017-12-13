@@ -9,7 +9,7 @@
   - Circular Array
   - Suffix Array
   - Dutch National Flag Problem
-  - Open Addressing
+  - [Open Addressing](#open-addressing)
 
 - ## Strings:
   - [Rabin–Karp](#rabin-karp)
@@ -17,15 +17,16 @@
   - Sliding Window Technique
 
 - ## Trees:
+  - [Self-Balancing BSTs](#self-balancing-bsts)
   - [Prefix Tree (Trie)](#prefix-tree)
-  - Segment Tree
-  - Binary Index Tree (Fenwick Tree)
+  - [B-Tree](#b-tree)
   - Recursive Traversals
   - Iterative Traversals
-  - Tree Reconstruction From Traversals
-  - Threaded Binary Trees
-  - Self-Balancing BSTs
-  - Fibonacci Heap
+  - [Tree Reconstruction From Traversals](#tree-reconstruction-from-traversals)
+  - [Threaded Binary Trees](#threaded-binary-trees)
+  - Segment Tree
+  - Binary Index Tree (Fenwick Tree)
+  - [Fibonacci Heaps](fibonacci-heaps)
 
 - ## Math:
   - [P, NP, NP-Completeness](#p-np-np-completeness)
@@ -187,7 +188,36 @@ while m < n do
 	m = m * 2
 ```
 
+## Open Addressing
+
+ Open addressing is a method of collision resolution (the other common one is chaining). If the bucket a key is hashed to is already used, a probe sequence is started until a free bucket is found.
+
+Types of probing sequences:
+
+- Linear probing
+
+- - The distance between probes is constant (i.e. 1, when probe examines consequent slots)
+
+- Quadratic probing
+
+  - The distance between probes increases by certain constant at each step (in this case distance to the      first slot depends on step number quadratically)
+
+- Double hashing
+
+- - The distance between probes is calculated using another hash function.
+
+Example of linear probing when a collision occurs:
+
+![linear probing](https://i.imgur.com/479y5g4.png)
+
+If we need to delete a value/key, we must mark the key as deleted instead of actually removing it or else probing sequences will find wrong keys.
+
+Example of the array after a deletion:
+
+![deletion example](https://i.imgur.com/mrDhfTk.png)
+
 # Strings
+
 ## Rabin-Karp
 From Erik Demaine's MIT 6.006:
 
@@ -371,26 +401,75 @@ From Professor Sandra Irani's Discrete Math Course Notes:
 		C(n + m - 1, m - 1)
 
 # Trees
+## Self-Balancing BSTs
+
+This page section covers only AVL and Red-Black trees. Note that there are other kinds of self-balancing BSTs.
+
+AVL Trees:
+
+```
+- Have the following properties:
+	- The sub-trees of every node differ in height by at most one
+	- Every sub-tree is an AVL tree
+Rotations are preformed during insertion is balance factor is exceeded
+```
+
+Red-Black Trees:
+
+```
+- Root is black
+- NIL nodes are used for leaves to denote None
+- All leaves (NIL nodes) are black
+- Cannot have two 
+- Every path from root to a NULL node has same number of black nodes
+- Each inserted node is red and tree is rotated if a property is violated
+```
+
+AVL Trees are better for look-up intensive applications that Red-Black Trees because they are more strictly balanced.
+
+Both AVL and Red-Black trees have the following time complexities:
+
+| Operation | Average  | Worst Case |
+| --------- | -------- | ---------- |
+| Space     | O(n)     | O(n)       |
+| Search    | O(log n) | O(log n)   |
+| Insert    | O(log n) | O(log n)   |
+| Delete    | O(log n) | O(log n)   |
+
 ## Prefix Tree
+
 Also known as a trie. 
+
+```
 - Is pronounced as the middle syllable of retrieval. 
 - O(w) search, w being the length of the query.
 - Space complexity is O(N*K)
 - Easy to implement with a dictionary.
-  ○ Textbook implementations generally use an array of the 26 alphabet characters.
+	- Textbook implementations generally use an array of the 26 alphabet characters.
 - Every node should also keep track of whether it is the ending letter of a word or not.
 - Root can also be empty node to denote multiple starting prefixes.
+```
+
+Example Trie:
+
+![trie](https://i.imgur.com/3lBoUqi.png)
 
 Variations: 
-- Ternary search tree (pronounced turn-a-ry):
+
+- **Ternary search tree** (pronounced turn-a-ry):
   - Type of trie where nodes are ordered like BSTs nodes
   - 3 children instead of 2
   - More space efficient at the cost of speed
-- Radix tree 
+- **Radix tree** 
   - A compressed trie
   - Has a variation of it called Patricia tree
 
+Example Radix Tree:
+
+![radix tree](https://i.imgur.com/0OdKrOR.png)
+
 Trie implementation with dictionaries:
+
 ```python
 class Trie(object):
 
@@ -428,7 +507,6 @@ class Trie(object):
         if 0 in cur:
             return True
         return False
-        
 
     def startsWith(self, prefix):
         """
@@ -443,6 +521,28 @@ class Trie(object):
             cur = cur[c]
         return True 
 ```
+## B-Tree
+
+Self-balancing tree with all O(Log N) operations. B-trees are optimized for systems that read and write large blocks of data, it is commonly used in databases and file systems.
+
+Idea is to organize data within the tree to correspond to sectors on disk.
+Read one disk sector at a time. One page corresponds to one tree node.
+Root node is stored in memory at all times, access nodes when we need to read from disk sectors.
+
+Every single read causes a whole sector to be loaded from the drive, so might as well take advantage of it.
+
+O(n) space and O(log n) search/insert/delete operations.
+
+## Tree Reconstruction From Traversals
+
+To reconstruct a binary tree from its traversals, we need an in-order traversal along with one other.
+
+The only following 3 combinations can reconstruct a tree:
+
+- In-order and pre-order
+- In-order and post-order
+- In-order and level-order (breadth-first traversal)
+
 ## Threaded Binary Trees
 
 Definition: "A binary tree is *threaded* by making all right child pointers that would normally be null point to the inorder successor of the node (**if** it exists), and all left child pointers that would normally be null point to the inorder predecessor of the node" (Van Wyk Christopher).
@@ -494,6 +594,19 @@ Preorder morris traversal visualization:
 ![preorder morris traversal](https://i.imgur.com/LmDdgQW.png)
 
 Morris traversal requires being able to modify the tree, however the tree is restored to its original form during the traversals. 
+
+## Fibonacci Heaps
+
+Advantage is O(1) amortized complexity for decrease key operations. Used in optimized
+version of Dijkstra's algorithm with O(E + V Log V) time complexity.
+
+| Operation    | Average  |
+| ------------ | -------- |
+| Insert       | Θ(1)     |
+| Find-min     | Θ(1)     |
+| Delete-min   | O(log n) |
+| Decrease-key | Θ(1)     |
+| Merge        | Θ(1)     |
 
 # Graphs
 

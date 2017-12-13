@@ -1,5 +1,7 @@
 # Works Cited
 
+“A Recursive Approach to Segment Trees, Range Sum Queries & Lazy Propagation.” *LeetCode*, leetcode.com/articles/recursive-approach-segment-trees-range-sum-queries-lazy-propagation/.
+
 “Backtracking | Set 1 (The Knight's tour problem).” *GeeksforGeeks*, www.geeksforgeeks.org/backtracking-set-1-the-knights-tour-problem/.
 
 “Bottom-up merge sort.” *Merge sort - Algorithmist*, www.algorithmist.com/index.php/Merge_sort.
@@ -21,3 +23,5 @@ J., Van Wyk Christopher. Data structures and C programs. Addison-Wesley, 1989.
 “Knight's tour.” Wikipedia, Wikimedia Foundation, en.wikipedia.org/wiki/Knight%27s_tour.
 
 “Morris traversal for Preorder.” *GeeksforGeeks*, www.geeksforgeeks.org/morris-traversal-for-preorder/.
+
+“Range Sum Query - Mutable.” *LeetCode*, leetcode.com/problems/range-sum-query-mutable/solution/.
