@@ -145,8 +145,10 @@ O(N) approach for solving selection problems is called Prune and Search (variant
 - Recursively select L, E, or G as appropriate
 ```
 ### Randomized Quick-Select:
-- Average O(N), O(N2) worst case.
-- When recursively selecting:
+Time complexity is O(N) on average and O(N^2) on worst case.
+
+When recursively selecting:
+
 ```
 	- if k ≤ |L| then
 		- quickSelect(L, k)
@@ -156,10 +158,11 @@ O(N) approach for solving selection problems is called Prune and Search (variant
 		- quickSelect(G, k − |L| − |E|)
 ```
 ### Deterministic Selection:
-- Always O(N)
-- Deterministic meaning will always have same runtime for given inputs
-- Idea is to deterministically pick the pivot instead of randomly
-- Algorithm:
+
+Deterministic meaning algorithm will always have same runtime for given inputs, this time complexity is O(N). Idea is to deterministically pick the pivot instead of randomly selecting it.
+
+Algorithm:
+
 ```
 	- Partition the set S into  ceiling(n/5) groups of size 5 each (except, possibly, for one group).
 	- Sort each group and identify its median element.
@@ -594,6 +597,26 @@ Preorder morris traversal visualization:
 ![preorder morris traversal](https://i.imgur.com/LmDdgQW.png)
 
 Morris traversal requires being able to modify the tree, however the tree is restored to its original form during the traversals. 
+
+## Segment Trees
+
+Source: LeetCode
+
+A segment tree is a binary tree where each node represents an interval. Generally a node would store one or more properties of an interval which can be queried later.
+
+Used to solve numerous range query problems like finding minimum, maximum, sum, greatest common divisor, least common denominator in array in logarithmic time.
+
+What does a segment tree contain?
+
+```
+- Let arr[] be an array of size n.
+- The root of our segment tree typically represents the entire interval of data we are interested in. This would be arr[0:n-1].
+- Each leaf of the tree represents a range comprising of just a single element.Thus the leaves represent arr[0], arr[1] and so on till arr[n-1].
+- The internal nodes of the tree would represent the merged or union result of their children nodes.
+- Each of the children nodes could represent approximately half of the range represented by their parent.
+```
+
+
 
 ## Fibonacci Heaps
 
