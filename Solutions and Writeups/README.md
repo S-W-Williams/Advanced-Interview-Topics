@@ -1,4 +1,4 @@
-# Pratice Problem Solutions
+# Practice	 Problem Solutions
 Compilation of my write ups for coding problems that I found valuable.
 
 # Bit Manipulation
@@ -67,7 +67,20 @@ This problem just requires implementation of the next lexicographic permutation 
 ```
 
 # Tree Problems
+## Binary Search Tree Iterator
+
+[LeetCode #173](https://leetcode.com/problems/binary-search-tree-iterator/description/)
+
+This can be solved easily with O(h) space and amortized O(1) time by pushing the nodes in the path to the left most leaf onto a stack. Every time next() is called, pop from the stack. This is the smallest node not yet iterated over.
+
+If the popped node has a right child, the next smallest will be in that right child's subtree, so we push the path to the left most leaf onto a stack again. If the popped node does not have a right child, the next smallest is it's parent. Repeat every time a node is popped until stack is empty.
+
+The problem has a more optimal solution with O(1) space and amortized O(1) time by using a threaded binary tree and doing a Morris traversal.
+
+See: https://discuss.leetcode.com/topic/24442/my-java-solution-with-o-1-space-and-o-1-amortized-time-using-morris-tree-traversal/2
+
 ## Unique Binary Search Trees
+
 [LeetCode #96](https://leetcode.com/problems/unique-binary-search-trees/description/)
 
 This is one of the problems where its better to just know the formula for it. This is an application of the Catalan numbers. From Wikipedia: "Cn is the number of non-isomorphic ordered trees with n vertices. (An ordered tree is a rooted tree in which the children of each vertex are given a fixed left-to-right order.)"
@@ -89,7 +102,60 @@ This was the logic I followed:
 
 My solution beats 99.38% of other Python solutions. Looking at the others, I think its because I'm doing conditional checks instead of assigning left and right subtree's sums to 0 if they are less than then node's value. Using functions like max() and min() does add significant time; looking at the cPython implementations both max() and min() initializes iterators and trys to use them regardless of the given input.
 
+# Backtracking
+
+### Word Search
+
+[LeetCode#79](https://leetcode.com/problems/word-search/description/)
+
+This problem is a good refresher on DFS backtracking. It is important to keep in mind that the value returned by the call at depth 0 (the root) of the recursion tree is the final return value.
+
+Thus we must let the root function know when we successfully find a word.
+
+Another restriction is is the same letter cell may not be used more than once, so we must keep track of visited coordinates for each DFS individually. One accomplish this is to use a visited set, with the penalty of using extra space. However if we are allowed to modify the board, we can set a flag for visited coordinates, and then restore them as the DFS is backtracking.
+
+```python
+class Solution(object):
+    def __init__(self):
+        self.cords = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+    def exist(self, board, word):
+        """
+        :type board: List[List[str]]
+        :type word: str
+        :rtype: bool
+        """
+        
+        for i in range(len(board)):
+            for j in range(len(board[i])):
+                if board[i][j] == word[0]:
+                    temp = board[i][j]
+                    board[i][j] = '#'
+                    if self._dfs(board, word, i, j, 0):
+                        return True
+                    board[i][j] = temp
+        return False
+        
+    def _dfs(self, board, word, i, j, n):
+        if n == len(word) - 1:
+            return True
+        for y,x in self.cords:
+            y += i
+            x += j
+            if y >= 0 and y < len(board) and x >= 0 and x < len(board[i]):
+                if board[y][x] == word[n+1]:
+                    temp = board[y][x]
+                    board[y][x] = '#'
+                    if self._dfs(board, word, y, x, n+1):
+                        return True
+                    board[y][x] = temp
+        return False
+```
+
+
+
 # Dynamic Programming
+
 ## Climbing Stairs
 [LeetCode #70](https://leetcode.com/problems/climbing-stairs/description/)
 

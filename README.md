@@ -128,6 +128,8 @@
 
 # Arrays
 ## Selection Algorithms
+From *Algorithm Design and Applications* 
+
 An example of a selection problem is selecting the kth smallest element from an unsorted collection of n elements. Can be solved in O(N Log N) time using sorting, but we can do better.
 
 O(N) approach for solving selection problems is called Prune and Search (variant of divide and conquer)
@@ -167,7 +169,7 @@ O(N) approach for solving selection problems is called Prune and Search (variant
 ## Bottom Up Merge Sort
 Useful for stable sorting in place without extra space. 
 
-Description from http://www.algorithmist.com/index.php/Merge_sortt
+Description from Algorithmist.com.
 
 Bottom-up merge sort is a non-recursive variant of the merge sort, in which the array is sorted by a sequence of passes. During each pass, the array is divided into blocks of size m (initially m = 1). Every two adjacent blocks are merged (as in normal merge sort), and the next pass is made with a twice larger value of m.
 
@@ -187,6 +189,8 @@ while m < n do
 
 # Strings
 ## Rabin-Karp
+From Erik Demaine's MIT 6.006:
+
 String matching algorithm with linear O(|s| + |t|) time complexity. 
 
 Used to solve the problem "Given s and t, does s occur as a substring in t?".
@@ -207,7 +211,7 @@ Algorithm:
 ```
 # Math
 ## P, NP, NP-Completeness
-Definitions from Erik Demaine's MIT 6.006 lecture video:
+Definitions from Erik Demaine's MIT 6.006:
 - **P** = {problems that can be solved in polynomial time}
 - **NP** = {decision problems solvable in polynomial time via a "lucky" algorithm}
   - **Lucky algorithm**: a magical algorithm that always makes a right guess among the given set of choices
@@ -243,7 +247,10 @@ For example in the given function below:
 The size of the input is not 3127, but rather Log(3127), which is approximately 12 bits long. Thus the time complexity is O(2^Log(N)), which is exponential.  
 
 ## Generating Permutations
-For generating permutations in lexicographic order:
+From Sandra Irani's Discrete Math Course Notes.
+
+To generate permutations in lexicographic order:
+
 ```
 - Initialize a list P
 - While P != reverse(P):
@@ -274,7 +281,11 @@ E.g. for the set (8,2,5,3,7,6,4,1):
 
 ## Counting
 <img src="https://i.imgur.com/sLUOSpk.png=250px" height="70%" width="70%"><br>
+
+From Professor Sandra Irani's Discrete Math Course Notes:
+
 ### The Product Rule:
+
 	- Cartesian product of the sets
 	- |S1|x|S2|x..|Sn|
 	- E.g. Picking lunch combinations
@@ -432,7 +443,60 @@ class Trie(object):
             cur = cur[c]
         return True 
 ```
+## Threaded Binary Trees
+
+Definition: "A binary tree is *threaded* by making all right child pointers that would normally be null point to the inorder successor of the node (**if** it exists), and all left child pointers that would normally be null point to the inorder predecessor of the node" (Van Wyk Christopher).
+
+Threaded Binary Trees allow for inorder and preorder traversals without using extra space. These traversals are called *morris* traversals, named after [James H. Morris](http://www.cs.cmu.edu/~jhm/).
+
+Pseudo code for inorder traversal and preorder traversals from Geeksforgeeks:
+
+```
+For inorder traversal:
+1. Initialize current as root 
+2. While current is not NULL
+   If current does not have left child
+      a) Print current node
+      b) Go to the right, i.e., current = current->right
+   Else
+      a) Make current as right child of the rightmost 
+         node in current's left subtree
+      b) Go to this left child, i.e., current = current->left
+```
+
+Inorder morris traversal visualization:
+
+![inorder morris traversal](https://i.imgur.com/2qZYGng.png)
+
+Another inorder visualization can be found [here](https://i.imgur.com/ZJSPuTI.jpg).
+
+```
+For preorder traversal
+1. Initialize current as root
+2. While current is not NULL
+	If current does not have left child
+		a) Print the current node
+		b) Move to right child.
+	Else
+		Make the right child of the inorder predecessor point to the current node and 
+		check for the following cases:
+			If the right child of the inorder predecessor already points to the current node.
+				a) Set right child to NULL
+				b) Move to right child of current node.
+			If the right child is NULL
+				a) Set it to current node. 
+				b) Print current node’s data
+				c) Move to left child of current node.
+```
+
+Preorder morris traversal visualization:
+
+![preorder morris traversal](https://i.imgur.com/LmDdgQW.png)
+
+Morris traversal requires being able to modify the tree, however the tree is restored to its original form during the traversals. 
+
 # Graphs
+
 Note that for Big O notation of graph algorthims, E and V is actually |E| and |V|. I omitted the cardinality notation for simplicity. 
 
 ## Cycle Detection
@@ -463,7 +527,7 @@ The Explore function assigns v to the connected component set c, and then recurs
 ```
 
 ## Strongly Connected Components
-We can also find strongly connected components in directed graphs using DFS with O(E + V) time complexity. The algorithm given in Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani suggests doing DFS on the graph while keeping track of the pre-visit and post-visit time of each vertex. The vertex with the highest post-visit time will belong to a sink SCC. Knowing this, we then transpose (also called reverse) the graph, and then do a DFS for finding connected components on the reversed graph starting with the highest post-time vertex. Repeat until we have visited all vertexes in the stack. 
+We can also find strongly connected components in directed graphs using DFS with O(E + V) time complexity. The algorithm given in *Algorithms* suggests doing DFS on the graph while keeping track of the pre-visit and post-visit time of each vertex. The vertex with the highest post-visit time will belong to a sink SCC. Knowing this, we then transpose (also called reverse) the graph, and then do a DFS for finding connected components on the reversed graph starting with the highest post-time vertex. Repeat until we have visited all vertexes in the stack. 
 
 We can simplify this by keeping track of the order the vertices are processed in a stack. Once DFS is done, the vertex at the top of the stack is the one with the highest post-visit time.
 
@@ -545,7 +609,7 @@ However this DFS approach will not work if there is cycle, so we must modify it 
     add n to head of L
 ```
 
-Another algorithm for topological sorting is Kahn's algorithm (the psuedo-code from Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani is below).
+Another algorithm for topological sorting is Kahn's algorithm (the psuedo-code from *Algorithms*).
 
 We will keep an array in[u] which holds the indegree (number of incoming edges) of each node. For a source, this value is zero. We will also keep a linked list of source nodes.
 
@@ -844,6 +908,8 @@ At best, we must select two of these remaining sets for their union to encompass
 The greedy algorithm could now pick the set {4, 5, 7}, followed by the set {6}.
 
 ## Knight’s Tour
+From Geeksforgeeks.
+
 Backtracking problem. A knight's tour is a sequence of moves of a knight on a chessboard such that the knight visits every square only once. 
 
 The knight's tour problem is an instance of the more general Hamiltonian path problem in graph theory. Unlike the Hamiltonian path problem, the knight's tour problem can be solved in linear time.
@@ -851,14 +917,14 @@ The knight's tour problem is an instance of the more general Hamiltonian path pr
 Backtracking approach:
 ```
 - If all squares are visited 
-	○ print the solution
+	- print the solution
 - Else
-	○ Add one of the next moves to solution vector and recursively check if this move leads to a solution.
-		§ (A Knight can make maximum eight moves. We choose one of the 8 moves in this step).
-	○ If the move chosen in the above step doesn't lead to a solution then remove this move from the solution vector and we try other moves.
-	○ If none of the alternatives work then return false.
-		§ Returning false will remove the previously added item in recursion. 
-		§ If false is returned by the initial call of recursion then "no solution exists"
+	- Add one of the next moves to solution vector and recursively check if this move leads to a solution.
+		- (A Knight can make maximum eight moves. We choose one of the 8 moves in this step).
+	- If the move chosen in the above step doesn't lead to a solution then remove this move from the solution vector and we try other moves.
+	- If none of the alternatives work then return false.
+		- Returning false will remove the previously added item in recursion. 
+		- If false is returned by the initial call of recursion then "no solution exists"
 ```
 Linear solution is Warnsdorf's rule:
 ```
@@ -867,4 +933,4 @@ Linear solution is Warnsdorf's rule:
 	- degree means number of unvisited adjacent
 ```
 Significance of Warnsdorf's rule:
-- Although the Hamiltonian path problem is NP-hard in general, on many graphs that occur in practice this heuristic is able to successfully locate a solution in linear time. The knight's tour is a special case.
+- Although the Hamiltonian path problem is NP-hard in general, on many graphs that occur in practice this heuristic is able to successfully locate a solution in linear time. The knight's tour is a special case (Wikipedia).

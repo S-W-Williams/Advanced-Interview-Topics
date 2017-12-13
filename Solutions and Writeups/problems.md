@@ -16,8 +16,12 @@ These problems are useful for becoming proficent with the specified data structu
 - [Count of Range Sum](https://leetcode.com/problems/count-of-range-sum/description/)
 - [Reverse Pairs](https://leetcode.com/problems/reverse-pairs/description/)
 
+## Threaded Binary Tree
+
+- [Binary Search Tree Iterator](https://leetcode.com/problems/binary-search-tree-iterator/description/)
+
 # Specific Approach Problems
-These problems are useful for praticing specific problem solving approaches
+These problems are useful for practicing specific problem solving approaches
 
 ## Bit Manipulation
 - [Power of Two](https://leetcode.com/problems/power-of-two/)
@@ -29,3 +33,4 @@ These problems are useful for praticing specific problem solving approaches
 - [Letter Combinations of a Phone Number](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
 - [Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
 - [Permutations](https://leetcode.com/problems/permutations/)
+- [Word Search](https://leetcode.com/problems/word-search/description/)
