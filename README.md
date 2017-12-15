@@ -109,7 +109,7 @@
 - Coin Change
 - Chain Matrix Multiplication
 - Edit Distance
-- Longest Increasing Subsequence
+- [Longest Increasing Subsequence](#longest-increasing-subsequence)
 - Longest Common Subsequence
 
 ## Bit Manipulation
@@ -983,7 +983,22 @@ If we have a choice between a bridge and a non-bridge, always choose the non-bri
 
 This can be implemented by checking if removing a given edge between v and u will make u have a degree of 0. The algorithm stops when there are not more edges.
 
+# Dynamic Programming
+
+## Longest Increasing Subsequence
+
+The LIS problem asks "given an unsorted array of integers, find the length of longest increasing subsequence".
+
+Can be solved in O(N^2) time with dynamic programming, however the optimal O(N Log N) solution uses binary search.
+
+![longest increasing subsequence recurrence relation](https://i.imgur.com/Qmp9RJo.png)
+
+For every index i in the input array A, we find the max previous entry (A[j] :where j < i) for values less than A[i] and increment it. When implementing, be sure to handle the case where there aren't any values less than A[i].
+
+
+
 # Famous Problems
+
 ## Huffman Coding:
 Greedy algorithm for text compression. O(N Log N) time complexity where n is the number of unique characters.
 

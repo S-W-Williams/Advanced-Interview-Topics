@@ -1,7 +1,51 @@
 # Practice	 Problem Solutions
 Compilation of my write ups for coding problems that I found valuable.
 
+# Binary Search
+
+## Longest Increasing Subsequence
+
+[LeetCode #300](https://leetcode.com/problems/longest-increasing-subsequence/)
+
+Although this is a common problem used to teach dynamic programming, the optimal solution is actually to use binary search.
+
+Requires an implementation of binary search that returns the index the element should be inserted into the array if not found (bisect_left in Python (element is to be inserted left of the returned index)).
+
+Start with an empty list. For all integers i in the input array, search for i in the list. If the index from binary search is equal to the length of the list, append i to the list, otherwise update the value at the index to i.
+
+For example:
+
+```
+Given an array a:
+a = [0, 8, 4, 12, 2]
+lis = []
+
+bisect_left(lis, 0) returns 0, and the length of lis is 0 so we append 10.
+lis = [0]
+
+bisect_left(lis, 8) returns 1, and the length of lis is 0 1 so we append 8.
+lis = [0, 8]
+
+bisect_left(lis, 4) returns 1, and the length of lis is 2 so we set lis[1] to 4.
+lis = [0, 4]
+
+bisect_left(lis, 12) returns 2, and the length of lis is 2 so we append 12.
+lis = [0, 4, 12]
+
+bisect_left(lis, 2) returns 1, and the length of lis is 3 so we set lis[1] to 2.
+lis = [0, 2, 12]
+
+The answer is length of lis, which is 3. Notice the list is NOT the actual subsequence.
+
+Also note that bisect_left returns index of left most value if there are duplicate values.
+```
+
+The length of the final list is the length of the LIS. The final list is <u>not</u> the LIS. This version does not allow for backtracking to find the actual subsequence. 
+
+Time complexity is O(N Log N).
+
 # Bit Manipulation
+
 ## Gray Code
 [LeetCode #89](https://leetcode.com/problems/gray-code/description/)
 
