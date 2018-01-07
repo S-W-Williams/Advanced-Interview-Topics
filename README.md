@@ -1026,7 +1026,7 @@ Case 3:
 E(i-1, j-1)
 The rightmost character is x[i] and y[j]
 ```
-![edit distance recurrence relation](https://i.imgur.com/8ddnFU3.png)
+![edit distance recurrence relation](https://i.imgur.com/ykxilkm.png)
 
 Diff(x,y) being a function that returns 0 or 1 depending on if the characters match or not.
 
