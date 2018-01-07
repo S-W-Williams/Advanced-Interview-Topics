@@ -104,11 +104,11 @@
 ## Dynamic Programming
 
 - Shortest/Longest Path in DAGs
-- 0/1 Knapsack
+- [0/1 Knapsack](#01-knapsack)
 - Weighted Interval Scheduling
 - Coin Change
 - Chain Matrix Multiplication
-- Edit Distance
+- [Edit Distance](#edit-distance)
 - [Longest Increasing Subsequence](#longest-increasing-subsequence)
 - Longest Common Subsequence
 
@@ -362,6 +362,7 @@ From Professor Sandra Irani's Discrete Math Course Notes:
 		○ Students are distinct, student council role is not C(100, 10)
 	- E.g. 10 same prizes to distribute to students, with at most 1 per person
 		○ If prizes were distinct we would use permutation P(100, 10)
+
 		○ If at most 1 per person was not a restriction, choices do not decrease 
 
 ### Counting Strings with subsets:
@@ -747,7 +748,7 @@ However this DFS approach will not work if there is cycle, so we must modify it 
 
 Another algorithm for topological sorting is Kahn's algorithm (the psuedo-code from *Algorithms*).
 
-We will keep an array in[u] which holds the indegree (number of incoming edges) of each node. For a source, this value is zero. We will also keep a linked list of source nodes.
+We will keep an array in[u] which holds the indegree (number of incoming edges) of each node. For a source, this value is zero. We will also keep a linked list of source nodes.
 
 ```
 (Set the in array)
@@ -985,6 +986,18 @@ This can be implemented by checking if removing a given edge between v and u wil
 
 # Dynamic Programming
 
+## 0/1 Knapsack
+Given an array of values, an array of weights, and capacity W, what is most valuable combination of items that can fit in W?
+
+We define K(w,j) as the maximum value achievable using a knapsack of capacity w and items 1 through j.
+
+The answer we want is K(W, n), with n being the size of the value/weight arrays.
+
+K(W, n) expressed in terms of smaller subproblems: either item j is needed to achieve the optimal value, or it isn't needed (Dasgupta et al., 2007).
+
+![0/1 knapsack recurrence relation](https://i.imgur.com/mjnqDgk.png)
+
+
 ## Longest Increasing Subsequence
 
 The LIS problem asks "given an unsorted array of integers, find the length of longest increasing subsequence".
@@ -995,11 +1008,31 @@ Can be solved in O(N^2) time with dynamic programming, however the optimal O(N L
 
 For every index i in the input array A, we find the max previous entry (A[j] :where j < i) for values less than A[i] and increment it. When implementing, be sure to handle the case where there aren't any values less than A[i].
 
+## Edit Distance
+Given two strings, x and y, find the minimum number of steps required to convert x to y.
+
+Edit distance can be expressed as E(i, j), where i and j are indexes of each string. E(i,j) can be expressed in terms of three smaller subproblems:
+
+```
+Case 1:
+E(i-1, j)
+The rightmost character is x[i]
+
+Case 2:
+E(i, j-1)
+The rightmost character is y[j]
+
+Case 3:
+E(i-1, j-1)
+The rightmost character is x[i] and y[j]
+```
+
+![edit distance recurrence relation](https://i.imgur.com/K8BUfvH.png)
 
 
 # Famous Problems
 
-## Huffman Coding:
+## Huffman Coding
 Greedy algorithm for text compression. O(N Log N) time complexity where n is the number of unique characters.
 
 Idea is to assign variable-length codes to input characters, lengths of the assigned codes are based on the frequencies of corresponding characters. The most frequent character gets the smallest code and the least frequent character gets the largest code. 
@@ -1036,7 +1069,7 @@ An example of a Huffman tree:
 <br><img src="https://i.imgur.com/LfRqswX.png" height="50%" width="50%"><br>
 
 ## Set Cover
-Given a universe U of n elements, a collection of subsets of U say S = {S1, S2…,Sm} where every subset Si has an associated cost. Find a minimum cost sub collection of S that covers all elements of U.
+Given a universe U of n elements, a collection of subsets of U say S = {S1, S2…,Sm} where every subset Si has an associated cost. Find a minimum cost sub collection of S that covers all elements of U.
 
 NP-complete problem. Greedy algorithm can only approximate. 
 
