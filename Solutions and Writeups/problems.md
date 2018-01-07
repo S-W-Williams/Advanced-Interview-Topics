@@ -1,6 +1,15 @@
 # Problem List
+# Essentials
+These are problems whose underlying concept should be mastered
+## Arrays
+- [Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/description/)
+
+## Linked Lists
+- [Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/description/)
+- [Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/description/)
+
 # Data Structure Problems
-These problems are useful for becoming proficent with the specified data structure
+These problems are useful for becoming proficient with the specified data structure
 
 ## Segment Tree
 - [Range Sum Query - Mutable](https://leetcode.com/problems/range-sum-query-mutable/description/)
