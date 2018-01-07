@@ -26,7 +26,7 @@
 - [Threaded Binary Trees](#threaded-binary-trees)
 - Segment Tree
 - Binary Index Tree (Fenwick Tree)
-- [Fibonacci Heaps](fibonacci-heaps)
+- [Fibonacci Heaps](#fibonacci-heaps)
 
 ## Math:
 - [P, NP, NP-Completeness](#p-np-np-completeness)
